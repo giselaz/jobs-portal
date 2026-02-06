@@ -1,6 +1,5 @@
 @php
     $breadcrumbs = \App\View\Components\Breadcrumbs::all();
-    // dd($breadcrumbs);
 @endphp
 @if (count($breadcrumbs) > 1)
     <nav {{ $attributes->class(['flex']) }} aria-label="breadcrumb">
