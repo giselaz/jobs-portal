@@ -16,7 +16,16 @@ class JobController extends Controller
     {
         Breadcrumbs::add('Home', '/');
         Breadcrumbs::add('Jobs', route('jobs.index'));
-        return view('jobs.index', ['jobs' => JobPortal::all()]);
+        $jobs = JobPortal::query();
+        $jobs->when(request('search'), function ($query) {
+            $query->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('description', 'like', '%' . request('search') . '%');
+        });
+        // $jobs->when(request('salary_min'), function ($query) {
+        //     $query->where('title', 'like', '%' . request('title') . '%')
+        //         ->orWhere('description', 'like', '%' . request('title') . '%');
+        // });
+        return view('jobs.index', ['jobs' => $jobs->get()]);
     }
 
     /**
