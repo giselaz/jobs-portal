@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\JobPortal;
+use App\View\Components\Breadcrumbs;
 use Illuminate\Http\Request;
 
 class JobController extends Controller
@@ -13,6 +14,8 @@ class JobController extends Controller
      */
     public function index()
     {
+        Breadcrumbs::add('Home', '/');
+        Breadcrumbs::add('Jobs', route('jobs.index'));
         return view('jobs.index', ['jobs' => JobPortal::all()]);
     }
 
@@ -37,6 +40,9 @@ class JobController extends Controller
      */
     public function show(JobPortal $job)
     {
+        Breadcrumbs::add('Home', '/');
+        Breadcrumbs::add('Jobs', route('jobs.index'));
+        Breadcrumbs::add($job->title, route('jobs.show', compact('job')));
         return view('jobs.show', compact('job'));
     }
 

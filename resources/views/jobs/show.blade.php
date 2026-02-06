@@ -1,5 +1,5 @@
 <x-layout>
-    <x-card>
-        hello
-    </x-card>
+    <x-job-card :$job>
+
+    </x-job-card>
 </x-layout>
