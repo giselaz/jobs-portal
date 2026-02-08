@@ -4,7 +4,7 @@ namespace App\View\Components;
 
 use Closure;
 use Illuminate\View\Component;
-use Illuminate\Contracts\View\View;
+use Illuminate\Contracts\View\View; 
 
 class TextInput extends Component
 {
@@ -14,7 +14,8 @@ class TextInput extends Component
     public function __construct(
         public ?string $value = null,
         public ?string $name = null,
-        public ?string $placeholder = null
+        public ?string $placeholder = null,
+        public ?string $formRef = null
     ) {}
 
     /**
