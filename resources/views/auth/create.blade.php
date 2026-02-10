@@ -1,0 +1,31 @@
+<x-layout>
+    <h1 class="text-slate-600 font-medium py-16 text-center text-4xl">Sign in to your account</h1>
+    <x-card>
+        <form action="{{ route('auth.store') }}" method="POST">
+            @csrf
+            <div class="mb-8">
+                <label for="email" class="mb-2 block text-sm font-medium text-slate-900">E-mail</label>
+                <x-text-input type="email" name="email" />
+            </div>
+            <div class="mb-8">
+                <label for="password" class="mb-2 block text-sm font-medium text-slate-900">Password</label>
+                <x-text-input type="password" name="password" />
+            </div>
+            <div class="mb-8 flex justify-between items-center text-sm font-medium">
+                <div>
+                    <div class="flex  items-center   gap-2">
+                        <input type="checkbox" name="remember" class="rounded-sm border border-slate-400 text-2xl"/>
+                        <label for="rembemer">Remember Me</label>
+                    </div>
+                </div>
+                <div>
+                    <a href="#" class=" text-indigo-600 hover:underline">Forgot Password</a>
+                </div>
+            </div>
+            <div class="flex w-full justify-center">
+                <x-button class="w-full p-10">Login</x-button>
+            </div>
+
+        </form>
+    </x-card>
+</x-layout>

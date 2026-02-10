@@ -14,11 +14,41 @@
     <!-- Styles / Scripts -->
     @if (file_exists(public_path('build/manifest.json')) || file_exists(public_path('hot')))
         @vite(['resources/css/app.css', 'resources/js/app.js'])
-   @endif
+    @endif
 </head>
 
 <body class=" mx-auto mt-10 max-w-2xl bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 text-slate-700">
-    <x-breadcrumbs class="mb-4" />
+    @auth
+        <nav class="mb-8 flex justify-between font-medium text-xl py-4">
+            <ul class="flex space-x-2">
+                <li>
+                    <a href="{{ route('jobs.index') }}">Home</a>
+                </li>
+            </ul>
+            <ul class="flex space-x-3 items-center">
+                @auth
+                    <li>
+
+                        {{ auth()->user()->name ?? 'Anynomus' }}
+                    </li>
+                    <li>
+                        <form action="{{ route('auth.destroy') }}" method="POST">
+                            @method('DELETE')
+                            @csrf
+                            <x-button class=" hover:font-bold cursor-pointer text-xs">Logout</x-button>
+                        </form>
+                    </li>
+                @else
+                    <li>
+                        <a href="{{ route('auth.create') }}">Sign In</a>
+                    </li>
+                @endauth
+            </ul>
+        </nav>
+
+        <x-breadcrumbs class="mb-4" />
+    @endauth
+
     {{ $slot }}
 </body>
 

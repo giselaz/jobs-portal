@@ -17,7 +17,7 @@ class JobController extends Controller
         Breadcrumbs::add('Home', '/');
         Breadcrumbs::add('Jobs', route('jobs.index'));
         $filters = request()->only('search', 'min_salary', 'max_salary', 'experience', 'category');
-        return view('jobs.index', ['jobs' => JobPortal::filter($filters)->get()]);
+        return view('jobs.index', ['jobs' => JobPortal::with('employer')->filter($filters)->get()]);
     }
 
     /**
@@ -43,8 +43,11 @@ class JobController extends Controller
     {
         Breadcrumbs::add('Home', '/');
         Breadcrumbs::add('Jobs', route('jobs.index'));
-        Breadcrumbs::add($job->title, route('jobs.show', compact('job')));
-        return view('jobs.show', compact('job'));
+        $jobModel = $job->load(['employer.jobPortals' => function ($query) use ($job) {
+            $query->where('id', '!=', $job->id);
+        }]);
+        Breadcrumbs::add($job->title, route('jobs.show', ['job' =>  $jobModel]));
+        return view('jobs.show', ['job' =>  $jobModel]);
     }
 
     /**
