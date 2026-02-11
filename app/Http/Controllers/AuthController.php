@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
 
-
+ 
 
     public function create()
     {
@@ -28,7 +28,7 @@ class AuthController extends Controller
             return redirect()->back()->with('error', 'Invalid Credentials');
         }
     }
-
+    
 
     public function destroy()
     {

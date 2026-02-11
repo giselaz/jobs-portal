@@ -18,7 +18,9 @@
 </head>
 
 <body class=" mx-auto mt-10 max-w-2xl bg-gradient-to-r from-indigo-100 via-purple-100 to-pink-100 text-slate-700">
-    @auth
+
+
+    @if (!request()->routeIs('auth.create'))
         <nav class="mb-8 flex justify-between font-medium text-xl py-4">
             <ul class="flex space-x-2">
                 <li>
@@ -45,10 +47,8 @@
                 @endauth
             </ul>
         </nav>
-
-        <x-breadcrumbs class="mb-4" />
-    @endauth
-
+        <x-breadcrumbs />
+    @endif
     {{ $slot }}
 </body>
 
