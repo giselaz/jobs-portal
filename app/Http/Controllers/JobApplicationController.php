@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JobPortal;
 use Illuminate\Http\Request;
 use App\View\Components\Breadcrumbs;
+use Illuminate\Support\Facades\Gate;
 
 class JobApplicationController extends Controller
 {
@@ -22,7 +23,8 @@ class JobApplicationController extends Controller
      */
     public function create(JobPortal $job)
     {
-
+        Gate::authorize('apply',$job);
+        // $this->authorize('apply');
         Breadcrumbs::add('Home', '/');
         Breadcrumbs::add('Jobs', route('jobs.index'));
         Breadcrumbs::add($job->title, route('jobs.show', ['job' =>  $job]));

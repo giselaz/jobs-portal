@@ -51,7 +51,7 @@
     @endif
     @if (session('success'))
         <div role="alert"
-            class=" text-green-700 my-8 rounded-md border-;-4 border-green-300 bg-green-100  opacity-75">
+            class=" text-green-700 my-8 mx-3 rounded-md border-l-4 border-green-300 bg-green-100  opacity-75">
             <p class="font-bold">
                 Success
             </p>

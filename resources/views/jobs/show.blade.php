@@ -3,9 +3,16 @@
         <p class=" text-sm text-slate-500 mb-4">
             {!! nl2br(e($job->description)) !!}
         </p>
-        {{-- <x-link-button href="{{ route('job.application.create', ['job', $job]) }}">
-            Apply
-        </x-link-button> --}}
+        @can('apply', $job)
+            <x-link-button href="{{ route('job.application.create', ['job' => $job]) }}">
+                Apply
+            </x-link-button>
+        @else
+            <x-messages.warning message="You already applied to this job">
+
+            </x-messages.warning>
+        @endcan
+
     </x-job-card>
     <x-card class="mb-4">
         <h2 class="font-medium text-lg mb-5">
