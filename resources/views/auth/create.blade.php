@@ -14,7 +14,7 @@
             <div class="mb-8 flex justify-between items-center text-sm font-medium">
                 <div>
                     <div class="flex  items-center   gap-2">
-                        <input type="checkbox" name="remember" class="rounded-sm border border-slate-400 text-2xl"/>
+                        <input type="checkbox" name="remember" class="rounded-sm border border-slate-400 text-2xl" />
                         <label for="rembemer">Remember Me</label>
                     </div>
                 </div>
@@ -25,6 +25,11 @@
             <div class="flex w-full justify-center">
                 <x-button class="w-full p-10">Login</x-button>
             </div>
+            @if (session('error'))
+                <div class="text-red-500">
+                    {{ session('error') }}
+                </div>
+            @endif
 
         </form>
     </x-card>

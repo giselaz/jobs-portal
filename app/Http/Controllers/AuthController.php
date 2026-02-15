@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Auth;
 class AuthController extends Controller
 {
 
- 
-
     public function create()
     {
         return view('auth.create');
@@ -25,10 +23,10 @@ class AuthController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             return redirect()->intended('/');
         } else {
-            return redirect()->back()->with('error', 'Invalid Credentials');
+            return redirect()->back()-> with('error', 'Invalid Credentials');
         }
     }
-    
+
 
     public function destroy()
     {

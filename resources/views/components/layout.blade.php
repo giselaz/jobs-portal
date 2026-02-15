@@ -49,6 +49,16 @@
         </nav>
         <x-breadcrumbs />
     @endif
+    @if (session('success'))
+        <div role="alert"
+            class=" text-green-700 my-8 rounded-md border-;-4 border-green-300 bg-green-100  opacity-75">
+            <p class="font-bold">
+                Success
+            </p>
+            <p>{{ session('success') }}</p>
+
+        </div>
+    @endif
     {{ $slot }}
 </body>
 

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\JobPortal;
 use Illuminate\Http\Request;
+use App\View\Components\Breadcrumbs;
 
 class JobApplicationController extends Controller
 {
@@ -18,17 +20,28 @@ class JobApplicationController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(JobPortal $job)
     {
-        //
+
+        Breadcrumbs::add('Home', '/');
+        Breadcrumbs::add('Jobs', route('jobs.index'));
+        Breadcrumbs::add($job->title, route('jobs.show', ['job' =>  $job]));
+        Breadcrumbs::add('Apply', route('job.application.create', ['job' => $job]));
+        return view('job_application.create', ['job' => $job]);
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(Request $request, JobPortal $job)
     {
-        //
+        $job->jobApplications()->create([
+            'user_id' => $request->user()->id,
+            ...$request->validate([
+                'expected_salary' => 'required|min:1|max:1000000'
+            ])
+        ]);
+        return redirect()->route('jobs.show', ['job' => $job])->with('success', 'Job application submitted');
     }
 
     /**
