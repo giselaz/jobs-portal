@@ -1,6 +1,6 @@
  <div {{ $attributes->class(['rounded-md p-4 shadow-md bg-white ']) }}>
-    <div class="mb-4 flex justify-between">
-         <h2 class="text-lg font-medium">{{ $job->title }}</h2>
+     <div class="mb-4 flex justify-between">
+         <h2 class="text-lg font-medium"><a class="hover:text-cyan-500" href="{{ route('jobs.show', ['job' => $job]) }}">{{ $job->title }}</a></h2>
          <div class="text-slate-500">
              ${{ number_format($job->salary) }}
          </div>

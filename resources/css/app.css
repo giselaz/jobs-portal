@@ -15,3 +15,7 @@
 .breadcrumb-active {
     @apply text-cyan-500 font-bold;
 }
+
+.danger-button {
+    @apply inline-flex items-center bg-red-400 text-xs font-medium text-white rounded-md inset-ring inset-ring-red-400/20 border-0;
+}

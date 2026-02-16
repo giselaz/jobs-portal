@@ -3,16 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\JobApplication;
 use Illuminate\Http\Request;
+use App\View\Components\Breadcrumbs;
 
 class MyJobApplicationController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $jobApplications = request()->user()->jobApplications()
+            ->with(['jobPortal' => fn($query) => $query->withCount('jobApplications')
+                ->withAvg('jobApplications', 'expected_salary'), 'jobPortal.employer'])->latest()->get();
+        Breadcrumbs::add('Home', '/');
+        Breadcrumbs::add('My Applications', route('my-job-application.index', ['applications' => $jobApplications]));
+        return view('my_job_application.index', ['applications' => $jobApplications]);
     }
 
     /**
@@ -58,8 +62,10 @@ class MyJobApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(JobApplication $myJobApplication)
     {
-        //
+        // dd($myJobApplication);
+        $myJobApplication->delete();
+        return redirect()->back()->with('success', 'Job Applicaton successfully deleted');
     }
 }

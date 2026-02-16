@@ -10,13 +10,17 @@ class JobApplication extends Model
 {
     /** @use HasFactory<\Database\Factories\JobApplicationFactory> */
     use HasFactory;
-    protected $fillable = ['user_id','expected_salary'];
-    public function job(): BelongsTo
+    protected $fillable = ['user_id','expected_salary','cv_path'];
+    public function jobPortal(): BelongsTo
     {
         return $this->belongsTo(JobPortal::class);
     }
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+    public function applicantsCount()
+    {
+        
     }
 }

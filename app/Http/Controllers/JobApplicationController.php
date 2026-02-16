@@ -23,7 +23,7 @@ class JobApplicationController extends Controller
      */
     public function create(JobPortal $job)
     {
-        Gate::authorize('apply',$job);
+        Gate::authorize('apply', $job);
         // $this->authorize('apply');
         Breadcrumbs::add('Home', '/');
         Breadcrumbs::add('Jobs', route('jobs.index'));
@@ -37,12 +37,22 @@ class JobApplicationController extends Controller
      */
     public function store(Request $request, JobPortal $job)
     {
-        $job->jobApplications()->create([
-            'user_id' => $request->user()->id,
-            ...$request->validate([
-                'expected_salary' => 'required|min:1|max:1000000'
-            ])
-        ]);
+        $validatedData =
+            $request->validate(
+                [
+                    'expected_salary' => 'required|min:1|max:1000000',
+                    "cv" => 'required|file|mime:pdf|max:2048'
+                ]
+            );
+        $file = $validatedData['cv'];
+        $path = $file->store('cvs','private');
+        $job->jobApplications()->create(
+            [
+                'user_id' => $request->user()->id,
+                'expected_salary' => $validatedData['expected_salary'],
+                'cv_path' => $path
+            ]
+        );
         return redirect()->route('jobs.show', ['job' => $job])->with('success', 'Job application submitted');
     }
 
