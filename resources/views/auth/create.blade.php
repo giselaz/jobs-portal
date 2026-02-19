@@ -25,11 +25,7 @@
             <div class="flex w-full justify-center">
                 <x-button class="w-full p-10">Login</x-button>
             </div>
-            @if (session('error'))
-                <div class="text-red-500">
-                    {{ session('error') }}
-                </div>
-            @endif
+
 
         </form>
     </x-card>

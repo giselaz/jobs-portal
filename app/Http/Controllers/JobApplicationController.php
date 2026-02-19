@@ -24,7 +24,6 @@ class JobApplicationController extends Controller
     public function create(JobPortal $job)
     {
         Gate::authorize('apply', $job);
-        // $this->authorize('apply');
         Breadcrumbs::add('Home', '/');
         Breadcrumbs::add('Jobs', route('jobs.index'));
         Breadcrumbs::add($job->title, route('jobs.show', ['job' =>  $job]));
@@ -45,7 +44,7 @@ class JobApplicationController extends Controller
                 ]
             );
         $file = $validatedData['cv'];
-        $path = $file->store('cvs','private');
+        $path = $file->store('cvs', 'private');
         $job->jobApplications()->create(
             [
                 'user_id' => $request->user()->id,

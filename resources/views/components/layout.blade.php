@@ -28,7 +28,11 @@
                 </li>
             </ul>
             <ul class="flex space-x-3 items-center">
+                    <li>
+                       <x-link-button href="{{route('employer.create')}}">Create Jobs</x-link-button> 
+                    </li>
                 @auth
+                   
                     <li x-data="{ open: false }" class="relative">
                         <button x-on:click="open = ! open" type="button"
                             class=" cursor-pointer inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white/10 px-3 py-2 text-sm font-semibold  text-slate-600 inset-ring-1 inset-ring-white/5 hover:bg-white/20">
@@ -73,6 +77,16 @@
                 Success
             </p>
             <p>{{ session('success') }}</p>
+
+        </div>
+    @endif
+    @if (session('error'))
+        <div role="alert"
+            class=" text-red-700 my-8  px-2 py-3 rounded-md border-l-4 border-red-300 bg-red-100  opacity-75">
+            <p class="font-bold">
+                Error!<br>
+            </p>
+            <p>{{ session('error') }}</p>
 
         </div>
     @endif
