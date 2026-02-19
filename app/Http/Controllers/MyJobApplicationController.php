@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JobApplication;
 use Illuminate\Http\Request;
 use App\View\Components\Breadcrumbs;
+use Illuminate\Support\Facades\Storage;
 
 class MyJobApplicationController extends Controller
 {
@@ -18,7 +19,20 @@ class MyJobApplicationController extends Controller
         Breadcrumbs::add('My Applications', route('my-job-application.index', ['applications' => $jobApplications]));
         return view('my_job_application.index', ['applications' => $jobApplications]);
     }
+    public function viewCv(JobApplication $application)
+    {
+        if ($application->user_id != request()->user()->id) {
+            return abort(403);
+        }
+        $path = $application->cv_path;
+        if ($path == null  || !Storage::disk('private')->exists($path)) {
+            abort(404);
+        }
 
+        return response()->file(
+            Storage::disk('private')->path($path)
+        );
+    }
     /**
      * Show the form for creating a new resource.
      */

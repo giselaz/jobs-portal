@@ -17,4 +17,5 @@ Route::delete('auth', [AuthController::class, 'destroy'])->name('auth.destroy');
 Route::middleware('auth')->group(function () {
     Route::resource('job.application', JobApplicationController::class)->only(['create', 'store']);
     Route::resource('my-job-application', MyJobApplicationController::class)->only(['index', 'destroy']);
+    Route::get('cv/{application}', [MyJobApplicationController::class, 'viewCv'])->name('cv.view');
 });

@@ -22,8 +22,16 @@
                     </form>
 
                 </div>
-
             </div>
+            @if ($jobApplication->cv_path !== null)
+                <div class="mt-4">
+                    <iframe src="{{ route('cv.view', $jobApplication) }}" frameborder="0"></iframe>
+                    <a href="{{ route('cv.view', $jobApplication) }}" target="_blank" class="font-bold">
+                        View CV
+                    </a>
+
+                </div>
+            @endif
 
         </x-job-card>
     @empty
