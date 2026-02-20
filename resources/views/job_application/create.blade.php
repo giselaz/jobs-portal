@@ -1,5 +1,5 @@
 <x-layout>
-    <x-job-card :job="$job" class="mb-4" />
+    <x-job-card :job="$job" class="mb-4" /> 
     <x-card class="">
         <h2 class=" font-bold text-slate-900">Your Job Application</b></h2>
         <form action="{{ route('job.application.store', $job) }}" method="POST" enctype="multipart/form-data">

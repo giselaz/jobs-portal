@@ -25,8 +25,6 @@
             <div class="flex w-full justify-center">
                 <x-button class="w-full p-10">Login</x-button>
             </div>
-
-
         </form>
     </x-card>
 </x-layout>
