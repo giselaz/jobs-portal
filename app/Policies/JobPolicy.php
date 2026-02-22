@@ -16,7 +16,14 @@ class JobPolicy
     {
         return true;
     }
-
+    public function viewEmployer(User $user,JobPortal $job): bool
+    {
+        if($user->employer_id !== $job->employer_id)
+        {
+            return false;
+        }
+        
+    }
     /**
      * Determine whether the user can view the model.
      */

@@ -21,5 +21,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('my-job-application', MyJobApplicationController::class)->only(['index', 'destroy']);
     Route::get('cv/{application}', [MyJobApplicationController::class, 'viewCv'])->name('cv.view');
     Route::resource('employer', EmployerController::class)->only(['create', 'store']);
-    Route::middleware('employer')->resource('my-jobs', MyJobController::class)->only(['index','store','create']);
+    Route::middleware('employer')->resource('my-jobs', MyJobController::class)->only(['index','store','create','edit','update']);
 });

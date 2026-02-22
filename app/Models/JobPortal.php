@@ -13,7 +13,7 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 class JobPortal extends Model
 {
     /** @use HasFactory<\Database\Factories\JobPortalFactory> */
-    use HasFactory;
+    use HasFactory; 
 
     public static array $experience = ['entry', 'intermediate', 'senior'];
     public static array $category = [
@@ -21,6 +21,14 @@ class JobPortal extends Model
         'Finance',
         'Sales',
         'Marketing'
+    ];
+    protected $fillable = [ 
+        'title',
+        'location',
+        'salary',
+        'description',
+        'experience',
+        'category'
     ];
     public function employer(): BelongsTo
     {

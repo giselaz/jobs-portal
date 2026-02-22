@@ -1,6 +1,6 @@
 <x-layout class="mb-4">
     @forelse ($applications as $jobApplication)
-        <x-job-card :job="$jobApplication->jobPortal" class="mb-4 ">
+        <x- -card :job="$jobApplication->jobPortal" class="mb-4 ">
             <div class="flex items-end justify-between text-slate-500 text-sm">
                 <div>
                     <p>Applied: {{ $jobApplication->created_at->diffForHumans() }}</p>
@@ -33,11 +33,9 @@
                 </div>
             @endif
 
-        </x-job-card>
+        </x->
     @empty
-        <x-empty-collection>
-            Go find some jobs <a href="{{ route('jobs.index') }}" class=" text-cyan-500 hover:underline">here</a>
-        </x-empty-collection>
+        <x-empty-collection title="No job applications yet" subtitle="go find some jobs" :url="route('jobs.index')" />
     @endforelse
 
 </x-layout>

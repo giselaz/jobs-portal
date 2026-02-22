@@ -22,14 +22,14 @@
                 </div>
                 <div>
                     <div class="mb-1 font-semibold">Experience</div>
-                    <x-radio-group name="experience" :options="array_combine(
+                    <x-radio-group name="experience" :value="old('experience')" :options="array_combine(
                         array_map('ucfirst', App\Models\JobPortal::$experience),
                         App\Models\JobPortal::$experience,
                     )" />
                 </div>
                 <div>
                     <div class="mb-1 font-semibold">Categories</div>
-                    <x-radio-group name="category" :options="App\Models\JobPortal::$category" />
+                    <x-radio-group name="category" :value="old('experience')" :options="App\Models\JobPortal::$category" />
                 </div>
             </div>
             <div class="flex justify-center">
@@ -37,7 +37,7 @@
             </div>
 
         </form>
- 
+
     </x-card>
     @foreach ($jobs as $job)
         <x-job-card class="mb-4" :job="$job">
