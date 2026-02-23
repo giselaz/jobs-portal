@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\JobPortal;
 use App\View\Components\Breadcrumbs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class JobController extends Controller
 {
@@ -14,6 +15,7 @@ class JobController extends Controller
      */
     public function index()
     {
+        Gate::authorize('viewAny',JobPortal::class);
         Breadcrumbs::add('Home', '/');
         Breadcrumbs::add('Jobs', route('jobs.index'));
         $filters = request()->only('search', 'min_salary', 'max_salary', 'experience', 'category');
@@ -25,6 +27,7 @@ class JobController extends Controller
      */
     public function show(JobPortal $job)
     {
+        Gate::authorize('view', $job);
         Breadcrumbs::add('Home', '/');
         Breadcrumbs::add('Jobs', route('jobs.index'));
         $jobModel = $job->load(['employer.jobPortals' => function ($query) use ($job) {

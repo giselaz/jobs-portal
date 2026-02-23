@@ -1,13 +1,10 @@
-<x-layouts.landing>
-<section class="border-t border-slate-100 bg-slate-50/30 py-10">
-        <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <x-section-title
-                title="My Jobs"
-                subtitle="Track your job and their status"
-                class="mb-8"
-            />
+---
+alwaysApply: true
+---
+
+<x-layout>
     <div class="w-full flex mb-8 justify-end">
-        <x-button href="{{ route('my-jobs.create') }}" variant="outline"> + Add New Job</x-button>
+        <x-link-button href="{{ route('my-jobs.create') }}"> + Add New Job</x-link-button>
     </div>
     @forelse ($jobs as $job)
         <x-job-card :job="$job">
@@ -43,6 +40,4 @@
     @empty
         <x-empty-collection title="No jobs yet" subtitle="go create some jobs" :url="route('my-jobs.create')" />
     @endforelse
-</div>
-</section>
-</x-layouts.landing>
+</x-layout>

@@ -15,9 +15,9 @@ class MyJobApplicationController extends Controller
         $jobApplications = request()->user()->jobApplications()
             ->with(['jobPortal' => fn($query) => $query->withCount('jobApplications')
                 ->withAvg('jobApplications', 'expected_salary'), 'jobPortal.employer'])->latest()->get();
-        Breadcrumbs::add('Home', '/');
-        Breadcrumbs::add('My Applications', route('my-job-application.index', ['applications' => $jobApplications]));
-        return view('my_job_application.index', ['applications' => $jobApplications]);
+            Breadcrumbs::add('Home', '/');
+            Breadcrumbs::add('My Applications', route('my-job-application.index', ['applications' => $jobApplications]));
+         return view('my_job_application.index', ['applications' => $jobApplications]);
     }
     public function viewCv(JobApplication $application)
     {

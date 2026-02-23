@@ -8,12 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 
 class JobPortal extends Model
 {
     /** @use HasFactory<\Database\Factories\JobPortalFactory> */
-    use HasFactory; 
+    use HasFactory, SoftDeletes; 
 
     public static array $experience = ['entry', 'intermediate', 'senior'];
     public static array $category = [

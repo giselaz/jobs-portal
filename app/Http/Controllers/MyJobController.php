@@ -7,11 +7,13 @@ use App\Http\Requests\JobRequest;
 use App\Models\JobPortal;
 use App\View\Components\Breadcrumbs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class MyJobController extends Controller
 {
     public function index()
     {
+        Gate::authorize('viewAnyEmployer', JobPortal::class);
         Breadcrumbs::add('Home', route('jobs.index'));
         Breadcrumbs::add('My Jobs', route('my-jobs.index'));
         $myJobs = request()->user()->employer->jobPortals()->with(['employer', 'jobApplications', 'JobApplications.user']);
@@ -20,6 +22,7 @@ class MyJobController extends Controller
 
     public function create()
     {
+        Gate::authorize('create', JobPortal::class);
         Breadcrumbs::add('Home', route('jobs.index'));
         Breadcrumbs::add('My Jobs', route('my-jobs.index'));
         Breadcrumbs::add('New Job', route('my-jobs.create'));
@@ -50,5 +53,12 @@ class MyJobController extends Controller
     {
         $myJob->update($request->validated());
         return redirect()->route("my-jobs.index")->with('success', 'Job updated successfully!');
+    }
+
+    public function destroy(JobPortal $myJob)
+    {
+        $myJob->delete();
+
+        return  redirect()->route('my-jobs.index')->with('success', "Job was was deleted");
     }
 }

@@ -16,13 +16,10 @@ class JobPolicy
     {
         return true;
     }
-    public function viewEmployer(User $user,JobPortal $job): bool
+    public function viewAnyEmployer(User $user): bool
     {
-        if($user->employer_id !== $job->employer_id)
-        {
-            return false;
-        }
-        
+
+        return true;
     }
     /**
      * Determine whether the user can view the model.
@@ -31,29 +28,37 @@ class JobPolicy
     {
         return true;
     }
-
     /**
      * Determine whether the user can create models.
      */
     public function create(User $user): bool
     {
-        return false;
+        return $user->employer !== null;
     }
 
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, JobPortal $jobPortal): bool
+    public function update(User $user, JobPortal $jobPortal): bool | Response
     {
-        return false;
+        if ($jobPortal->employer->user_id !== $user->id) {
+            return false;
+        }
+        if ($jobPortal->jobApplications()->count() > 0) {
+            return Response::deny('Can not change job with applications');
+        }
+        return true;
     }
 
     /**
-     * Determine whether the user can delete the model.
+     * Determine whether the user can delete the model. 
      */
     public function delete(User $user, JobPortal $jobPortal): bool
     {
-        return false;
+        if ($jobPortal->employer->user_id !== $user->id) {
+            return false;
+        }
+        return true;
     }
 
     /**
@@ -74,7 +79,6 @@ class JobPolicy
 
     public function apply(User $user, JobPortal $jobPortal): bool
     {
-
-       return !$jobPortal->hasUserApplied($user);
+        return !$jobPortal->hasUserApplied($user);
     }
 }

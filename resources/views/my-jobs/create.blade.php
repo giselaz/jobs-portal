@@ -34,8 +34,7 @@
                     )" />
                 </div>
                 <div class="col-span-2 flex justify-center">
-                    <x-button>Create</x-button>
-                </div>
+                  <x-button type="button" variant="primary"> Create </x-button>
                     
             </div>
         </form>
