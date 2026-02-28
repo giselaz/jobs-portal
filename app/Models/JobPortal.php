@@ -14,7 +14,7 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
 class JobPortal extends Model
 {
     /** @use HasFactory<\Database\Factories\JobPortalFactory> */
-    use HasFactory, SoftDeletes; 
+    use HasFactory, SoftDeletes;
 
     public static array $experience = ['entry', 'intermediate', 'senior'];
     public static array $category = [
@@ -23,7 +23,7 @@ class JobPortal extends Model
         'Sales',
         'Marketing'
     ];
-    protected $fillable = [ 
+    protected $fillable = [
         'title',
         'location',
         'salary',
@@ -60,14 +60,22 @@ class JobPortal extends Model
                         $query->where('company_name', 'like', '%' . $search . '%');
                     });
             });
-        })->when($filters['min_salary'] ?? null, function ($query, $min_salary) {
-            $query->where('salary', '>=', $min_salary);
-        })->when($filters['max_salary'] ?? null, function ($query, $max_salary) {
-            $query->where('salary', '<=', $max_salary);
-        })->when($filters['experience'] ?? null, function ($query, $experience) {
-            $query->where('experience', $experience);
-        })->when($filters['category'] ?? null, function ($query, $category) {
-            $query->where('category', $category);
-        });
+        })
+            ->when($filters['location'] ?? null, function ($query, $location) {
+                $query->where('location', 'like', '%' . $location . '%');
+            })
+            ->when($filters['min_salary'] ?? null, function ($query, $min_salary) {
+                $query->where('salary', '>=', $min_salary);
+            })->when($filters['max_salary'] ?? null, function ($query, $max_salary) {
+                $query->where('salary', '<=', $max_salary);
+            })->when($filters['experience'] ?? null, function ($query, $experience) {
+                $query->where('experience', $experience);
+            })->when($filters['category'] ?? null, function ($query, $category) {
+                $query->where('category', $category);
+            });
+    }
+    public function scopePopularApplications(Builder | QueryBuilder $query): Builder | QueryBuilder
+    {
+        return $query->withCount('jobApplications')->orderByDesc('job_applications_count');
     }
 }

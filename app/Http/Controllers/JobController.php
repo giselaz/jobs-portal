@@ -18,7 +18,7 @@ class JobController extends Controller
         Gate::authorize('viewAny',JobPortal::class);
         Breadcrumbs::add('Home', '/');
         Breadcrumbs::add('Jobs', route('jobs.index'));
-        $filters = request()->only('search', 'min_salary', 'max_salary', 'experience', 'category');
+        $filters = request()->only('keyword', 'min_salary', 'max_salary', 'experience', 'category','location');
         return view('jobs.index', ['jobs' => JobPortal::with('employer')->latest()->filter($filters)->paginate(10)]);
     }
 

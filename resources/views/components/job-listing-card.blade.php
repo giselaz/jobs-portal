@@ -1,11 +1,8 @@
-@props([
-    'title',
-    'location' => '',
-    'companyInitials' => 'Co',
-    'applyUrl' => '#',
-])
-<article {{ $attributes->merge(['class' => 'flex flex-wrap items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow md:flex-nowrap']) }}>
-    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-violet-100 text-sm font-semibold text-violet-700">
+@props(['title', 'location' => '', 'companyInitials' => 'Co', 'applyUrl' => '#'])
+<article
+    {{ $attributes->merge(['class' => 'flex flex-wrap items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow md:flex-nowrap']) }}>
+    <div
+        class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-violet-100 text-sm font-semibold text-violet-700">
         {{ $companyInitials }}
     </div>
     <div class="min-w-0 flex-1">

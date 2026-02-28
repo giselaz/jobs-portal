@@ -13,7 +13,14 @@ class EmployerController extends Controller
     use AuthorizesRequests;
     public function __construct()
     {
-        $this->authorizeResource(Employer::class, 'employer');
+        $this->authorizeResource(Employer::class, 'employer', [
+            'except' => ['index']
+        ]);
+    }
+    public function index()
+    {
+
+        return view('employer.index', ['employers'=>Employer::all()]);
     }
     public function create()
     {
