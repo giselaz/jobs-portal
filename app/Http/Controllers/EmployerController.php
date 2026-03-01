@@ -14,13 +14,18 @@ class EmployerController extends Controller
     public function __construct()
     {
         $this->authorizeResource(Employer::class, 'employer', [
-            'except' => ['index']
+            'except' => ['index','show']
         ]);
     }
     public function index()
     {
 
-        return view('employer.index', ['employers'=>Employer::all()]);
+        return view('employer.index', ['employers' => Employer::all()]);
+    }
+
+    public function show(Employer $employer)
+    {
+        return view('employer.show', ['employer' => $employer]);
     }
     public function create()
     {

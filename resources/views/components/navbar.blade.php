@@ -8,15 +8,10 @@
         </ul>
         <ul class="flex space-x-3 items-center">
             @auth
-                {{-- @if (!auth()->user()->employer())
-                    <li>
-                        <x-link-button href="{{ route('employer.create') }}">Create Jobs</x-link-button>
-                    </li>
-                @endif --}}
                 <li class="relative" x-data="{ open: false }">
                     <button type="button" @click="open = !open"
                         class="inline-flex items-center gap-x-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-1">
-                        {{ auth()->user()->name ?? 'Anonymous' }}
+                        {{ auth()->user() && auth()->user()->name ?? 'Anonymous' }}
                         <svg class="-mr-0.5 size-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
                             <path
                                 d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
@@ -24,7 +19,7 @@
                         </svg>
                     </button>
                     <x-dropdown>
-                        @if (auth()->user()->employer)
+                        @if (auth()->user() && auth()->user()->employer)
                 <li><a href="{{ route('my-jobs.index') }}"
                         class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-violet-50 hover:text-violet-700 transition">My
                         Jobs</a></li>
@@ -56,7 +51,7 @@
         <ul class="hidden items-center gap-8 md:flex">
             <li><a href="/" class="text-slate-600 hover:text-violet-600">Home</a></li>
             <li><a href="{{ route('jobs.index') }}" class="text-slate-600 hover:text-violet-600">Jobs</a></li>
-            <li><a href="#" class="text-slate-600 hover:text-violet-600">Employers</a></li>
+            <li><a href="{{ route('employer.index') }}" class="text-slate-600 hover:text-violet-600">Employers</a></li>
             <li><a href="#" class="text-slate-600 hover:text-violet-600">Job Seekers</a></li>
             <li><a href="{{ route('my-jobs.create') }}" class="text-slate-600 hover:text-violet-600">Post a Job</a>
             </li>
@@ -65,7 +60,7 @@
             <div x-data="{ open: false }" class="relative">
                 <button type="button" @click="open = !open"
                     class="inline-flex items-center gap-x-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-1">
-                    {{ auth()->user()->name ?? 'Anonymous' }}
+                    {{ (auth()->user() && auth()->user()->name) ? auth()->user()->name: 'Anonymous' }}
                     <svg class="-mr-0.5 size-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
                         <path
                             d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
@@ -73,7 +68,7 @@
                     </svg>
                 </button>
                 <x-dropdown>
-                    @if (auth()->user()->employer)
+                    @if (auth()->user() && auth()->user()->employer)
                         <li><a href="{{ route('my-jobs.index') }}"
                                 class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-violet-50 hover:text-violet-700 transition">My
                                 Jobs</a></li>

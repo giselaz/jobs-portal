@@ -15,12 +15,13 @@ Route::resource('jobs', JobController::class)->only(['index', 'show']);
 Route::resource('auth', AuthController::class)->only(['create', 'store']);
 Route::delete('logout', fn() => to_route('auth.destroy'))->name('logout');
 Route::delete('auth', [AuthController::class, 'destroy'])->name('auth.destroy');
-
+Route::get('employer', [EmployerController::class, 'index'])->name('employer.index');
+Route::get('employer/{employer}', [EmployerController::class, 'show'])->name('employer.show');
 
 Route::middleware('auth')->group(function () {
     Route::resource('job.application', JobApplicationController::class)->only(['create', 'store']);
     Route::resource('my-job-application', MyJobApplicationController::class)->only(['index', 'destroy']);
     Route::get('cv/{application}', [MyJobApplicationController::class, 'viewCv'])->name('cv.view');
-    Route::resource('employer', EmployerController::class)->only(['index', 'create', 'store']);
-    Route::middleware('employer')->resource('my-jobs', MyJobController::class)->only(['index', 'store', 'create', 'edit', 'update', 'destroy']);
+    Route::resource('employer', EmployerController::class)->only(['create', 'store']);
+    Route::middleware('employer')->resource('my-jobs', MyJobController::class)->only(['store', 'create', 'edit', 'update', 'destroy']);
 });

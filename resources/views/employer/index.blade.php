@@ -23,7 +23,8 @@
                                 posted</p>
                         </div>
                         <div class="shrink-0">
-                            <x-button variant="primary">View Jobs</x-button>
+                            <x-link-button href="{{ route('employer.show', $employer) }}" variant="primary">View
+                                Jobs</x-link-button>
                         </div>
                     </article>
                 @empty
@@ -32,7 +33,7 @@
                     </div>
                 @endforelse
             </div>
-{{-- 
+            {{-- 
             @if ($employers->hasPages())
                 <div class="mt-10 flex justify-center">
                     {{ $employers->links() }}
