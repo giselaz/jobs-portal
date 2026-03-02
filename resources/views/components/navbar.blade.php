@@ -60,7 +60,7 @@
             <div x-data="{ open: false }" class="relative">
                 <button type="button" @click="open = !open"
                     class="inline-flex items-center gap-x-1.5 rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-semibold text-slate-700 shadow-sm hover:bg-slate-50 hover:border-slate-300 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-1">
-                    {{ (auth()->user() && auth()->user()->name) ? auth()->user()->name: 'Anonymous' }}
+                    {{ auth()->user() && auth()->user()->name ? auth()->user()->name : 'Anonymous' }}
                     <svg class="-mr-0.5 size-4 text-slate-400" viewBox="0 0 20 20" fill="currentColor">
                         <path
                             d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"
@@ -89,7 +89,7 @@
         @else
             <div class="flex items-center gap-3">
                 <x-button variant="outline" href="{{ route('auth.create') }}">Login</x-button>
-                <x-button variant="primary" href="#">Signup</x-button>
+                <x-button variant="primary" href="{{ route('register') }}">Signup</x-button>
             </div>
         @endauth
 

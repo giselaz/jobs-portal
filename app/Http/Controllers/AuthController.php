@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Requests\LoginRequest;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
@@ -14,16 +14,14 @@ class AuthController extends Controller
         return view('auth.create');
     }
 
-
-    public function store(Request $request)
+    public function store(LoginRequest $request)
     {
-        $request->validate(['email' => 'required', 'password' => 'required']);
         $credentials = $request->only(['email', 'password']);
         $remember = $request->filled('remember');
         if (Auth::attempt($credentials, $remember)) {
             return redirect()->intended('/');
         } else {
-            return redirect()->back()-> with('error', 'Invalid Credentials');
+            return redirect()->back()->with('error', 'Invalid Credentials');
         }
     }
 
