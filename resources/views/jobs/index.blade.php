@@ -37,7 +37,6 @@
                     </div>
                 </form>
             </div>
-
             <div class="space-y-4">
                 @forelse ($jobs as $job)
                     <x-job-card :job="$job">

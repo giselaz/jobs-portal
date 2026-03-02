@@ -8,7 +8,10 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use App\Observers\UserObserver;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 
+#[ObservedBy([UserObserver::class])]
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
@@ -23,8 +26,9 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
-
+    public static array $roles = ['employer', 'candidate'];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -52,7 +56,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Employer::class);
     }
-    public function candidateProfile():HasOne{
+    public function candidateProfile(): HasOne
+    {
         return $this->hasOne(CandidateProfile::class);
     }
     public function jobApplications(): HasMany

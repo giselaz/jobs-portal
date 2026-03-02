@@ -11,7 +11,12 @@ class UserObserver
      */
     public function created(User $user): void
     {
-        //
+        if ($user->role === 'candidate') {
+            $user->candidateProfile()->create();
+        }
+        if ($user->role === 'employer') {
+            $user->employer()->create();
+        }
     }
 
     /**
