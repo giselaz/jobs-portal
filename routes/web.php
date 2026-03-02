@@ -8,13 +8,20 @@ use App\Http\Controllers\MyJobApplicationController;
 use App\Http\Controllers\MyJobController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\RegisterController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
+// loginController
 Route::get('login', fn() => to_route('auth.create'))->name('login');
-Route::resource('jobs', JobController::class)->only(['index', 'show']);
 Route::resource('auth', AuthController::class)->only(['create', 'store']);
 Route::delete('logout', fn() => to_route('auth.destroy'))->name('logout');
 Route::delete('auth', [AuthController::class, 'destroy'])->name('auth.destroy');
+//Register Controller
+Route::get('register', [RegisterController::class, 'create'])->name('register');
+Route::post('register', [RegisterController::class, 'store']);
+// JobsController
+Route::resource('jobs', JobController::class)->only(['index', 'show']);
+// Employer
 Route::get('employer', [EmployerController::class, 'index'])->name('employer.index');
 Route::get('employer/{employer}', [EmployerController::class, 'show'])->name('employer.show');
 
