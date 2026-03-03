@@ -6,7 +6,6 @@ use Illuminate\Routing\Controller;
 use App\Models\Employer;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
-use Illuminate\Support\Facades\Gate;
 
 class EmployerController extends Controller
 {
