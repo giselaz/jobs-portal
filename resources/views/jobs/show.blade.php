@@ -3,9 +3,7 @@
         <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
             <a href="{{ route('jobs.index') }}"
                 class="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-violet-600 transition">
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
+                <x-heroicon-o-arrow-left class="h-4 w-4" />
                 Back to jobs
             </a>
 
@@ -71,10 +69,7 @@
                                 </div>
                                 <span class="mt-2 flex items-center text-sm font-medium text-violet-600 md:mt-0">
                                     View job
-                                    <svg class="ml-1 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 5l7 7-7 7" />
-                                    </svg>
+                                    <x-heroicon-o-chevron-right class="ml-1 h-4 w-4" />
                                 </span>
                             </a>
                         @endforeach

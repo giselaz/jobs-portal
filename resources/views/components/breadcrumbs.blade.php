@@ -7,14 +7,13 @@
             @foreach ($breadcrumbs as $breadcrumb)
                 <li class="flex items-center gap-1.5">
                     @if (!$loop->first)
-                        <svg class="h-4 w-4 shrink-0 text-slate-400" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                            <path d="M5.555 17.776l8-8-8-8 1.414-1.414 8 8-8 8 1.414 1.414z" />
-                        </svg>
+                        <x-heroicon-o-chevron-right class="h-4 w-4 shrink-0 text-slate-400" />
                     @endif
                     @if ($loop->last)
                         <span class="font-semibold text-violet-600">{{ $breadcrumb['title'] }}</span>
                     @else
-                        <a href="{{ $breadcrumb['url'] }}" class="hover:text-violet-600 transition">{{ $breadcrumb['title'] }}</a>
+                        <a href="{{ $breadcrumb['url'] }}"
+                            class="hover:text-violet-600 transition">{{ $breadcrumb['title'] }}</a>
                     @endif
                 </li>
             @endforeach

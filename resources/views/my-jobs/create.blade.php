@@ -3,9 +3,7 @@
         <div class="mx-auto max-w-4xl py-4">
             <a href="{{ route('my-jobs.index') }}"
                 class="mb-6 inline-flex items-center gap-1.5 text-sm font-medium text-slate-600 hover:text-violet-600 transition">
-                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
-                </svg>
+                <x-heroicon-o-arrow-left class="h-4 w-4" />
                 Back to Jobs
             </a>
         </div>

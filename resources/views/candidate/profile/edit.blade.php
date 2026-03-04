@@ -1,11 +1,9 @@
 <x-layouts.landing>
     <section class="min-h-[80vh] px-4 py-12">
         <div class="mx-auto max-w-4xl">
-            <div class="mb-8">
-                <h1 class="text-3xl font-bold tracking-tight text-slate-900">Edit Your Profile</h1>
-                <p class="mt-2 text-slate-600">Update your profile information to help employers find you</p>
-            </div>
 
+            <x-section-title title="Edit Your Profile"
+                subtitle="Update your profile information to help employers find you" class="mb-8 text-left"/>
             <form action="{{ route('profile.update', $profile) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
