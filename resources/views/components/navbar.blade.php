@@ -76,6 +76,9 @@
                         <li><a href="{{ route('my-job-application.index') }}"
                                 class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-violet-50 hover:text-violet-700 transition">Check
                                 Applications</a></li>
+                        <li><a href="{{ route('profile.show', auth()->user()->candidateProfile) }}"
+                                class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-violet-50 hover:text-violet-700 transition">
+                                My Profile</a></li>
                     @endif
                     <li class="border-t border-slate-100">
                         <form action="{{ route('auth.destroy') }}" method="POST" class="p-2">
@@ -84,7 +87,7 @@
                             <x-button type="submit" variant="outline" :isLogout="true">Logout</x-button>
                         </form>
                     </li>
-                </x-dropdown>
+                </x-dropdown> 
             </div>
         @else
             <div class="flex items-center gap-3">

@@ -6,7 +6,7 @@
                 <p class="mt-2 text-slate-600">Update your profile information to help employers find you</p>
             </div>
 
-            <form action="{{ route('profile.update',$profile) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('profile.update', $profile) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
@@ -15,20 +15,6 @@
                     <h2 class="mb-6 text-xl font-semibold text-slate-900">Personal Information</h2>
 
                     <div class="grid gap-6 sm:grid-cols-2">
-                        {{-- <div>
-                            <x-label for="name" :required="true">Full Name</x-label>
-                            <x-text-input name="name" type="text"
-                                value="{{ old('name', $profile?->user?->name ?? auth()->user()->name) }}"
-                                placeholder="John Doe" class="mt-1.5" />
-                        </div>
-
-                        <div>
-                            <x-label for="email" :required="true">Email</x-label>
-                            <x-text-input type="email" name="email"
-                                value="{{ old('email', $profile?->user?->email ?? auth()->user()->email) }}"
-                                placeholder="you@example.com" class="mt-1.5" />
-                        </div> --}}
-
                         <div>
                             <x-label for="phone" :required="false">Phone Number</x-label>
                             <x-text-input type="text" name="phone" value="{{ old('phone', $profile?->phone) }}"
@@ -37,8 +23,9 @@
 
                         <div>
                             <x-label for="location" :required="false">Location</x-label>
-                            <x-text-input type="text" name="location" value="{{ old('location', $profile?->location) }}"
-                                placeholder="New York, USA" class="mt-1.5" />
+                            <x-text-input type="text" name="location"
+                                value="{{ old('location', $profile?->location) }}" placeholder="New York, USA"
+                                class="mt-1.5" />
                         </div>
                     </div>
                 </div>
@@ -50,8 +37,9 @@
                     <div class="grid gap-6 sm:grid-cols-2">
                         <div>
                             <x-label for="job_title" :required="true">Job Title</x-label>
-                            <x-text-input type="text" name="job_title" value="{{ old('job_title', $profile?->job_title) }}"
-                                placeholder="Software Engineer" class="mt-1.5" />
+                            <x-text-input type="text" name="job_title"
+                                value="{{ old('job_title', $profile?->job_title) }}" placeholder="Software Engineer"
+                                class="mt-1.5" />
                         </div>
 
                         <div>
@@ -112,7 +100,7 @@
 
                 <!-- Form Actions -->
                 <div class="flex items-center justify-end gap-4">
-                    <x-button type="button" variant="outline" href="{{ route('jobs.index') }}">
+                    <x-button type="button" variant="outline" href="{{ route('profile.show', $profile) }}">
                         Cancel
                     </x-button>
                     <x-button type="submit" variant="primary">

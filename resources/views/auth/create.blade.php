@@ -29,7 +29,7 @@
             </div>
             <p class="mt-6 text-center text-sm text-slate-600">
                 Don't have an account?
-                <a href="#" class="font-medium text-violet-600 hover:text-violet-700 transition">Sign up</a>
+                <a href="{{ route('register') }}" class="font-medium text-violet-600 hover:text-violet-700 transition">Sign up</a>
             </p>
         </div>
     </section>

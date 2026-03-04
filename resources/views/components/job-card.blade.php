@@ -1,11 +1,7 @@
 @props(['job'])
-@php
-    $initials = strtoupper(mb_substr($job->employer->company_name, 0, 2));
-@endphp
-<article {{ $attributes->merge(['class' => 'flex flex-wrap items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow md:flex-nowrap']) }}>
-    <div class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-violet-100 text-sm font-semibold text-violet-700">
-        {{ $initials }}
-    </div>
+<article
+    {{ $attributes->merge(['class' => 'flex flex-wrap items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow md:flex-nowrap']) }}>
+    <x-initials-avatar :name="$job->employer->company_name" size="md" />
     <div class="min-w-0 flex-1">
         <h2 class="font-semibold text-slate-900">
             <a href="{{ route('jobs.show', $job) }}" class="hover:text-violet-600">{{ $job->title }}</a>

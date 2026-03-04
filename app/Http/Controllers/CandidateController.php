@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobCandidateRequest;
-use App\Models\CandidateProfile;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -18,7 +16,7 @@ class CandidateController extends Controller
     public function show()
     {
         $profile = Auth::user()->candidateProfile;
-        return view("candidate.profile.edit", compact('profile'));
+        return view("candidate.profile.show", compact('profile'));
     }
 
     /**
@@ -73,5 +71,23 @@ class CandidateController extends Controller
     public function destroy(string $id)
     {
         //
+    }
+
+    /**
+     * Download the candidate's CV.
+     */
+    public function downloadCv()
+    {
+        $profile = Auth::user()->candidateProfile;
+
+        if (!$profile || !$profile->cv_path) {
+            return abort(404, 'CV not found');
+        }
+
+        if (!Storage::disk('public')->exists($profile->cv_path)) {
+            return abort(404, 'CV file not found');
+        }
+
+        return response()->download(storage_path('app/public/' . $profile->cv_path));
     }
 }

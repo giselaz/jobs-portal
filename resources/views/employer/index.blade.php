@@ -5,21 +5,15 @@
 
             <div class="space-y-4">
                 @forelse ($employers as $employer)
-                    @php
-                        $initials = strtoupper(mb_substr($employer->company_name, 0, 2));
-                        $jobCount = $employer->jobPortals()->count();
-                    @endphp
                     <article
                         class="flex flex-wrap items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow md:flex-nowrap">
-                        <div
-                            class="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-violet-100 text-sm font-semibold text-violet-700">
-                            {{ $initials }}
-                        </div>
+                        <x-initials-avatar :name="$employer->company_name" size="md" />
                         <div class="min-w-0 flex-1">
                             <h2 class="font-semibold text-slate-900">
                                 {{ $employer->company_name }}
                             </h2>
-                            <p class="text-sm text-slate-500">{{ $jobCount }} {{ Str::plural('job', $jobCount) }}
+                            <p class="text-sm text-slate-500">{{ $employer->jobPortals()->count() }}
+                                {{ Str::plural('job', $employer->jobPortals()->count()) }}
                                 posted</p>
                         </div>
                         <div class="shrink-0">
@@ -28,9 +22,7 @@
                         </div>
                     </article>
                 @empty
-                    <div class="rounded-xl border border-slate-200 bg-white p-12 text-center shadow-sm">
-                        <p class="text-slate-600">No employers found.</p>
-                    </div>
+                    <x-empty-collection title="No employers found" subtitle="Check back later for new opportunities" />
                 @endforelse
             </div>
             {{-- 
