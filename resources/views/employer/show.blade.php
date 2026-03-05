@@ -1,9 +1,8 @@
 <x-layouts.landing>
-    <section class="border-t border-slate-100 bg-white py-10">
+    <section class="border-t border-slate-100 bg-white py-10"> 
         <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <!-- Employer Header -->
             <x-employer-header :employer="$employer" />
-
             <!-- Jobs Section -->
             <x-section-title title="Jobs at {{ $employer->company_name }}" subtitle="Browse available positions"
                 class="mb-8" />

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobCandidateRequest;
+use App\Models\CandidateProfile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,10 +14,18 @@ class CandidateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show()
+    public function show(CandidateProfile $candidate)
     {
-        $profile = Auth::user()->candidateProfile;
-        return view("candidate.profile.show", compact('profile'));
+        $user = request()->user()->loadCount('jobApplications');
+        $profile = $user->candidateProfile;
+        $applicationCount = $user->job_applications_count;
+        $recentApplications = $user->jobApplications()
+            ->with('jobPortal')
+            ->latest()
+            ->limit(5)
+            ->get();
+
+        return view("candidate.profile.show", compact('profile', 'recentApplications', 'applicationCount'));
     }
 
     /**
@@ -48,14 +57,14 @@ class CandidateController extends Controller
         ];
 
         // Handle CV upload
-        // if ($request->hasFile('cv_path')) {
-        //     // Delete old CV if exists
-        //     if ($user->candidateProfile && $user->candidateProfile->cv_path) {
-        //         Storage::delete($user->candidateProfile->cv_path);
-        //     }
-        //     $path = $request->file('cv_path')->store('cvs', 'public');
-        //     $profileData['cv_path'] = $path;
-        // }
+        if ($request->hasFile('cv_path')) {
+            // Delete old CV if exists
+            if ($user->candidateProfile && $user->candidateProfile->cv_path) {
+                Storage::delete($user->candidateProfile->cv_path);
+            }
+            $path = $request->file('cv_path')->store('cvs', 'private');
+            $profileData['cv_path'] = $path;
+        }
 
         $user->candidateProfile()->updateOrCreate(
             ['user_id' => $user->id],
