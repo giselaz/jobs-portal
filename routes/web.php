@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::get('cv/{application}', [MyJobApplicationController::class, 'viewCv'])->name('cv.view');
     Route::resource('employer', EmployerController::class)->only(['create', 'store']);
     Route::middleware('employer')->resource('my-jobs', MyJobController::class)->only(['store', 'create', 'edit', 'update', 'destroy']);
-    Route::get('candidate/profile/{profile}', [CandidateController::class, 'show']);
+    Route::get('candidate/profile/{profile}', [CandidateController::class, 'show'])->name('profile.show');
     Route::middleware('candidate')->resource('candidate/profile', CandidateController::class)->only(['edit', 'update']);
     Route::get('candidate/cv/download', [CandidateController::class, 'downloadCv'])->name('candidate.cv.download');
 });
