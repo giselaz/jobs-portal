@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('candidate_education', function (Blueprint $table) {
             $table->id();
+            $table->string('job_title');
+            $table->string('institution');
+            $table->string('degree');
+            $table->string('field_of_study');
+            $table->date('start_date');
+            $table->date('end_date')->nullable();
+            $table->boolean('is_current')->default(false);
+
+            $table->text('description')->nullable();
             $table->timestamps();
         });
     }

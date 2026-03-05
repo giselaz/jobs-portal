@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('candidate_skills', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('candidate_profile_id')->constrained()->cascadeOnDelete();
+
+            $table->string('name');
+            $table->string('level')->nullable();
+            $table->integer('years_experience')->nullable();
             $table->timestamps();
         });
     }

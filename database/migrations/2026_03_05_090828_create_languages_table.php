@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('languages', function (Blueprint $table) {
+        Schema::create('candidate_languages', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('candidate_profile_id')->constrained()->cascadeOnDelete();
+            $table->string('language');
+            $table->string('proficiency');
+
             $table->timestamps();
         });
     }
