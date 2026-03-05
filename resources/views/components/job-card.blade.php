@@ -10,7 +10,7 @@
         <p class="mt-1 text-sm font-medium text-slate-600">${{ number_format($job->salary) }}</p>
         <div class="mt-2 flex flex-wrap gap-2">
             <x-tag variant="pill">{{ Str::ucfirst($job->experience) }}</x-tag>
-            <x-tag variant="pill">{{ $job->category }}</x-tag>
+            <x-tag variant="pill">{{ $job->category }}</x-tag> 
         </div>
     </div>
     <div class="shrink-0">
