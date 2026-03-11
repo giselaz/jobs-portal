@@ -10,6 +10,17 @@ class CandidateExperience extends Model
 {
     /** @use HasFactory<\Database\Factories\CandidateExperienceFactory> */
     use HasFactory;
+    protected $fillable = [
+        'candidate_profile_id',
+        'job_title',
+        'company_name',
+        'location',
+        'employment_type', 
+        'start_date',
+        'end_date',
+        'description',
+        'is_current'
+    ];
 
     public function candidateProfile(): BelongsTo
     {

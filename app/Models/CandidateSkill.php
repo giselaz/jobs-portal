@@ -9,6 +9,8 @@ class CandidateSkill extends Model
 {
     /** @use HasFactory<\Database\Factories\CandidateSkillFactory> */
     use HasFactory;
+    protected $fillable = ['candidate_profile_id', 'name', 'level', 'years_experience',''];
+
     public function candidateProfile(): HasOne
     {
         return $this->hasOne(CandidateProfile::class);

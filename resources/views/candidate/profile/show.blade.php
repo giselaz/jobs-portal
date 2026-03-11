@@ -1,6 +1,6 @@
 <x-layouts.landing>
     <div class="min-h-[80vh] px-4 py-12">
-        <div class="mx-auto max-w-6xl">
+        <div class="mx-auto max-w-6xl"> 
             <x-section-title title="My Profile" subtitle="Manage your profile and view your applications"
                 class="mb-8 text-left" />
             <div class="grid gap-8 lg:grid-cols-4">

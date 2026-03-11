@@ -33,6 +33,11 @@
                         <x-heroicon-o-document class="size-5" />
                         View CV
                     </x-candidate.sidebar.navlink>
+                @else
+                    <x-candidate.sidebar.navlink :route="route('candidate.cv.uploadCv',$profile)">
+                        <x-heroicon-o-arrow-up-tray class="size-5" />
+                        Upload CV
+                    </x-candidate.sidebar.navlink>
                 @endif
             </nav>
         </x-card-body>

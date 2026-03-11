@@ -3,13 +3,13 @@
         <div class="mx-auto max-w-4xl">
 
             <x-section-title title="Edit Your Profile"
-                subtitle="Update your profile information to help employers find you" class="mb-8 text-left"/>
+                subtitle="Update your profile information to help employers find you" class="mb-8 text-left" />
             <form action="{{ route('profile.update', $profile) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
 
                 <!-- Personal Information Section -->
-                <div class="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+                <x-card class="mb-8 rounded-2xl border">
                     <h2 class="mb-6 text-xl font-semibold text-slate-900">Personal Information</h2>
 
                     <div class="grid gap-6 sm:grid-cols-2">
@@ -26,10 +26,10 @@
                                 class="mt-1.5" />
                         </div>
                     </div>
-                </div>
+                </x-card>
 
                 <!-- Professional Information Section -->
-                <div class="mb-8 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
+                <x-card class="mb-8  border p-6">
                     <h2 class="mb-6 text-xl font-semibold text-slate-900">Professional Information</h2>
 
                     <div class="grid gap-6 sm:grid-cols-2">
@@ -70,22 +70,6 @@
                                 </select>
                             </div>
                         </div>
-
-                        <div>
-                            <x-label for="cv_path" :required="false">Upload CV</x-label>
-                            <input type="file" name="cv_path" id="cv_path" accept=".pdf,.doc,.docx"
-                                class="mt-1.5 block w-full text-sm text-slate-500
-                                    file:mr-4 file:py-2 file:px-4
-                                    file:rounded-md file:border-0
-                                    file:text-sm file:font-semibold
-                                    file:bg-violet-50 file:text-violet-700
-                                    hover:file:bg-violet-100
-                                " />
-                            @if ($profile?->cv_path)
-                                <p class="mt-2 text-xs text-slate-500">Current CV: {{ basename($profile->cv_path) }}
-                                </p>
-                            @endif
-                        </div>
                     </div>
 
                     <div class="mt-6">
@@ -94,7 +78,7 @@
                             placeholder="Tell us about yourself, your skills, and experience..."
                             class="mt-1.5 min-h-[150px]" />
                     </div>
-                </div>
+                </x-card>
 
                 <!-- Form Actions -->
                 <div class="flex items-center justify-end gap-4">
@@ -106,6 +90,7 @@
                     </x-button>
                 </div>
             </form>
+           
         </div>
     </section>
 </x-layouts.landing>

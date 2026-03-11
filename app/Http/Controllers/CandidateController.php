@@ -2,18 +2,17 @@
 
 namespace App\Http\Controllers;
 
+set_time_limit(300); // 5 minutes
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobCandidateRequest;
+use App\Jobs\ParseResumeJob;
 use App\Models\CandidateProfile;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use  Illuminate\Http\Request;
 
 class CandidateController extends Controller
 {
-
-    /**
-     * Display the specified resource.
-     */
     public function show(CandidateProfile $candidate)
     {
         $user = request()->user()->loadCount('jobApplications');
@@ -28,18 +27,12 @@ class CandidateController extends Controller
         return view("candidate.profile.show", compact('profile', 'recentApplications', 'applicationCount'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         $profile = Auth::user()->candidateProfile;
         return view("candidate.profile.edit", compact('profile'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(JobCandidateRequest $request)
     {
 
@@ -56,16 +49,6 @@ class CandidateController extends Controller
             'is_profile_complete' => true,
         ];
 
-        // Handle CV upload
-        if ($request->hasFile('cv_path')) {
-            // Delete old CV if exists
-            if ($user->candidateProfile && $user->candidateProfile->cv_path) {
-                Storage::delete($user->candidateProfile->cv_path);
-            }
-            $path = $request->file('cv_path')->store('cvs', 'private');
-            $profileData['cv_path'] = $path;
-        }
-
         $user->candidateProfile()->updateOrCreate(
             ['user_id' => $user->id],
             $profileData
@@ -74,14 +57,31 @@ class CandidateController extends Controller
         return redirect()->back()->with('success', 'Profile updated successfully!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
+    public function uploadCv()
     {
-        //
-    }
 
+        $user = request()->user()->loadCount('jobApplications');
+        $profile = $user->candidateProfile;
+        $processing = false;
+        $profile->load(['experiences', 'educations', 'languages', 'skills']);
+        return view('candidate.profile.upload-cv', compact('profile', 'processing'));
+    }
+    public function storeCv(Request $request)
+    {
+        $request->validate([
+            'cv_path' => 'required|file|mimes:pdf,doc,docx|max:2048'
+        ]);
+
+        $profile = request()->user()->candidateProfile;
+        $path = $request->file('cv_path')->store('cvs', 'private');
+        $profile->update([
+            'cv_path' => $path
+        ]);
+
+        ParseResumeJob::dispatch(storage_path('app/private/' . $path), $profile);
+
+        return back()->with('success', 'CV uploaded and profile auto-filled!');
+    }
     /**
      * Download the candidate's CV.
      */
