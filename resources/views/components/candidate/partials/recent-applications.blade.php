@@ -1,22 +1,7 @@
-<x-layouts.landing>
-    <div class="min-h-[80vh] px-4 py-12">
-        <div class="mx-auto max-w-6xl"> 
-            <x-section-title title="My Profile" subtitle="Manage your profile and view your applications"
-                class="mb-8 text-left" />
-            <div class="grid gap-8 lg:grid-cols-4">
-                <!-- Sidebar -->
-                <x-candidate.sidebar :profile="$profile" :applicationCount="$applicationCount" />
-
-                <!-- Main Content -->
-                <div class="lg:col-span-3">
-                    @if ($profile)
-                        <!-- Profile Info Card -->
-                       <x-candidate.partials.profile :profile="$profile"/>
-
-                        <!-- Recent Applications -->
-
-                        @if ($recentApplications->count() > 0)
-                            <x-card class="border">
+  @props([
+    'recentApplications'
+  ])
+  <x-card class="border">
                                 <x-card-header>
                                     <h2 class="text-lg font-semibold text-slate-900">Recent Applications</h2>
                                     <a href="{{ route('my-job-application.index') }}"
@@ -47,22 +32,3 @@
                                     </div>
                                 </x-card-body>
                             </x-card>
-                        @endif
-                    @else
-                        <!-- Empty State -->
-                        <div class="rounded-2xl border border-slate-200 bg-white p-8 text-center shadow-sm">
-                            <x-heroicon-o-user class="mx-auto size-12 text-slate-400" />
-                            <h3 class="mt-4 text-lg font-semibold text-slate-900">No Profile Yet</h3>
-                            <p class="mt-2 text-slate-600">Complete your profile to help employers find you</p>
-                            <a href="{{ route('candidate.profile.edit') }}" class="mt-6 inline-block">
-                                <x-button type="button" variant="primary">
-                                    Complete Profile
-                                </x-button>
-                            </a>
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-</x-layouts.landing>

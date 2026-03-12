@@ -15,7 +15,8 @@
                     'w-full rounded-md border-0 py-1.5 px-2.5 pr-8 text-sm ring-1 placeholder:text-slate-400 focus:ring-violet-600 ' .
                     (!$errors->has($name) ? 'ring-slate-300 focus:ring-violet-600' : 'ring-red-500 focus:ring-red-500'),
             ]) }} />
-    @else
+
+    @else 
         <textarea name="{{ $name }}" id="{{ $name }}" cols="30" rows="10"
             @class([
                 'w-full rounded-md border-0 py-1.5 px-2.5 pr-8 text-sm ring-1 placeholder:text-slate-400 focus:ring-2',

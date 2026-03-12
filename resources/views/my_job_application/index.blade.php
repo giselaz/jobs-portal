@@ -20,7 +20,7 @@
                                 <div class="min-w-0 flex-1">
                                     <h2 class="font-semibold text-slate-900">
                                         <a href="{{ route('jobs.show', $job) }}"
-                                            class="hover:text-violet-600 transition">{{ $job->title }}</a>
+                                            class="hover:text-violet-600 transition">{{ $job->title }}</a> 
                                     </h2>
                                     <p class="text-sm text-slate-500">{{ $job->employer->company_name }} ·
                                         {{ $job->location }}</p>
