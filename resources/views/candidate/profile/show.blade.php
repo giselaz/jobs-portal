@@ -1,9 +1,9 @@
 <x-layouts.landing>
     <div class="min-h-[80vh] px-4 py-12">
-        <div class="mx-auto max-w-6xl"> 
+        <div class="mx-auto max-w-6xl">
             <x-section-title title="My Profile" subtitle="Manage your profile and view your applications"
                 class="mb-8 text-left" />
-            <div class="grid gap-8 lg:grid-cols-4">
+            <div class="grid gap-8 lg:grid-cols-4" x-data="{ activeTab: 'profile' }"> 
                 <!-- Sidebar -->
                 <x-candidate.sidebar :profile="$profile" :applicationCount="$applicationCount" />
 
@@ -11,42 +11,36 @@
                 <div class="lg:col-span-3">
                     @if ($profile)
                         <!-- Profile Info Card -->
-                       <x-candidate.partials.profile :profile="$profile"/>
+                        <x-candidate.partials.profile :profile="$profile" x-show="activeTab === 'profile'" x-transition />
+
+                        <!-- Experience Section -->
+                        @if ($profile->experiences->count() > 0)
+                            <x-candidate.partials.experience :profile="$profile" x-show="activeTab === 'experience'"
+                                x-transition />
+                        @endif
+
+                        <!-- Education Section -->
+                        @if ($profile->educations->count() > 0)
+                            <x-candidate.partials.education :profile="$profile" x-show="activeTab === 'education'"
+                                x-transition />
+                        @endif
+
+                        <!-- Languages Section -->
+                        @if ($profile->languages->count() > 0)
+                            <x-candidate.partials.language :profile="$profile" x-show="activeTab === 'language'"
+                                x-transition />
+                        @endif
+
+                        <!-- Skills Section -->
+                        @if ($profile->skills->count() > 0)
+                            <x-candidate.partials.skill :profile="$profile" x-show="activeTab === 'skills'"
+                                x-transition />
+                        @endif
 
                         <!-- Recent Applications -->
-
                         @if ($recentApplications->count() > 0)
-                            <x-card class="border">
-                                <x-card-header>
-                                    <h2 class="text-lg font-semibold text-slate-900">Recent Applications</h2>
-                                    <a href="{{ route('my-job-application.index') }}"
-                                        class="text-sm font-medium text-violet-600 hover:text-violet-700">View all</a>
-                                </x-card-header>
-                                <x-card-body>
-                                    <div class="space-y-4">
-                                        @foreach ($recentApplications as $application)
-                                            <div
-                                                class="flex items-center justify-between rounded-lg border border-slate-200 p-4">
-                                                <div>
-                                                    <h3 class="font-medium text-slate-900">
-                                                        {{ $application->jobPortal->title }}</h3>
-                                                    <p class="text-sm text-slate-500">
-                                                        {{ $application->jobPortal->employer->company_name ?? 'Company' }}
-                                                    </p>
-                                                </div>
-                                                <div class="text-right">
-                                                    <span
-                                                        class="@if ($application->status === 'pending') text-yellow-600 @elseif($application->status === 'accepted') text-green-600 @else text-slate-600 @endif text-sm font-medium">
-                                                        {{ ucfirst($application->status) }}
-                                                    </span>
-                                                    <p class="text-xs text-slate-500">
-                                                        {{ $application->created_at->diffForHumans() }}</p>
-                                                </div>
-                                            </div>
-                                        @endforeach
-                                    </div>
-                                </x-card-body>
-                            </x-card>
+                            <x-candidate.partials.recent-applications :$recentApplications
+                                x-show="activeTab === 'applications'" x-transition />
                         @endif
                     @else
                         <!-- Empty State -->
