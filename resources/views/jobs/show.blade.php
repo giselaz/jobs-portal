@@ -35,14 +35,16 @@
 
                     @auth
                         @can('apply', $job)
-                            <a href="{{ route('job.application.create', ['job' => $job]) }}" class="mt-8 inline-block">
+                            <a href="{{ route('candidate.job.application.create', ['job' => $job]) }}"
+                                class="mt-8 inline-block">
                                 <x-button variant="primary">Apply for this job</x-button>
                             </a>
                         @else
                             <x-messages.warning class="mt-8" message="You have already applied to this job." />
                         @endcan
                     @else
-                        <a href="{{ route('job.application.create', ['job' => $job]) }}" class="mt-8 inline-block">
+                        <a href="{{ route('candidate.job.application.create', ['job' => $job]) }}"
+                            class="mt-8 inline-block">
                             <x-button variant="primary">Apply for this job</x-button>
                         </a>
                     @endauth

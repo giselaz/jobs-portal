@@ -13,30 +13,41 @@ use App\Http\Controllers\CandidateController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 // loginController
+Route::prefix('auth')->name('auth.')->group(function () {
+    Route::get('/', [AuthController::class, 'create'])->name('create');
+    Route::post('/', [AuthController::class, 'store'])->name('store');
+    Route::delete('/', [AuthController::class, 'destroy'])->name('destroy');
+});
 Route::get('login', fn() => to_route('auth.create'))->name('login');
-Route::resource('auth', AuthController::class)->only(['create', 'store']);
-Route::delete('logout', fn() => to_route('auth.destroy'))->name('logout');
-Route::delete('auth', [AuthController::class, 'destroy'])->name('auth.destroy');
-//Register Controller
 Route::get('register', [RegisterController::class, 'create'])->name('register');
 Route::post('register', [RegisterController::class, 'store']);
 // JobsController
 Route::resource('jobs', JobController::class)->only(['index', 'show']);
-// Employer
-Route::get('employer', [EmployerController::class, 'index'])->name('employer.index');
-Route::get('employer/{employer}', [EmployerController::class, 'show'])->name('employer.show');
 
-Route::middleware('auth')->group(function () {
+Route::prefix('candidate')->name('candidate.')->middleware(['auth', 'candidate'])->group(function () {
     Route::resource('job.application', JobApplicationController::class)->only(['create', 'store']);
     Route::resource('my-job-application', MyJobApplicationController::class)->only(['index', 'destroy']);
     Route::get('cv/{application}', [MyJobApplicationController::class, 'viewCv'])->name('cv.view');
-    Route::resource('employer', EmployerController::class)->only(['create', 'store']);
-    Route::middleware('employer')->resource('my-jobs', MyJobController::class)->only(['store', 'create', 'edit', 'update', 'destroy']);
-    Route::get('candidate/profile/', [CandidateController::class, 'show'])->name('profile.show');
-    Route::middleware('candidate')->group(function () {
-        Route::resource('candidate/profile', CandidateController::class)->only(['edit', 'update']);
-        Route::get('candidate/profile/download-cv', [CandidateController::class, 'downloadCv'])->name('candidate.cv.download');
-        Route::get('candidate/profile/upload-cv', [CandidateController::class, 'uploadCv'])->name('candidate.cv.uploadCv');
-        Route::post('candidate/profile/store-cv', [CandidateController::class, 'storeCv'])->name('candidate.cv.upload');
+    Route::prefix('profile')->name('profile.')->group(function () {
+        Route::get('/', [CandidateController::class, 'show'])->name('show');
+        Route::get('edit', [CandidateController::class, 'edit'])->name('edit');
+        Route::patch('edit', [CandidateController::class, 'update'])->name('update');
+        Route::get('download-cv', [CandidateController::class, 'downloadCv'])->name('cv.download');
+        Route::get('upload-cv', [CandidateController::class, 'uploadCv'])->name('cv.uploadCv');
+        Route::post('store-cv', [CandidateController::class, 'storeCv'])->name('cv.upload');
     });
+});
+
+Route::prefix('employer')->name('employer.')->middleware(['auth'])->group(function () {
+    Route::get('/', [EmployerController::class, 'index'])->name('index');
+    Route::get('/{employer}', [EmployerController::class, 'show'])->name('show');
+    Route::get('create', [EmployerController::class, 'create'])->name('create');
+    Route::post('/', [EmployerController::class, 'store'])->name('store');
+    Route::middleware('employer')->group(function () {
+        Route::resource('my-jobs', MyJobController::class)->only(['create', 'store', 'edit', 'update', 'destroy']);
+    });
+});
+
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
+    // Future admin routes
 });

@@ -1,8 +1,10 @@
 @props(['profile'])
 <x-card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
-    <x-card-header>
-        
-    </x-card-header>
+    <x-candidate.partials.user-data-header title="Experience" :subtitle="$profile->experiences->count() . ' Experiences'">
+        <x-slot name="icon">
+            <x-heroicon-o-briefcase class="size-5 text-slate-600" />
+        </x-slot>
+    </x-candidate.partials.user-data-header>
     <x-card-body class="p-0">
         @if ($profile->experiences->count() > 0)
             <div class="divide-y divide-slate-200">
@@ -22,8 +24,8 @@
                                         </p>
                                     </div>
                                     <span class="text-sm font-medium text-slate-500 whitespace-nowrap">
-                                        {{ \Carbon\Carbon::parse($experience->start_date)->format('M Y')}} -
-                                        {{ $experience->is_current ? 'Present' : \Carbon\Carbon::parse($experience->end_date)->format('M Y')}}
+                                        {{ \Carbon\Carbon::parse($experience->start_date)->format('M Y') }} -
+                                        {{ $experience->is_current ? 'Present' : \Carbon\Carbon::parse($experience->end_date)->format('M Y') }}
                                     </span>
                                 </div>
                                 @if ($experience->location)
@@ -43,18 +45,13 @@
                 @endforeach
             </div>
         @else
-            <div class="text-center py-12 px-6">
-                <div class="mx-auto size-20 bg-slate-100 rounded-2xl p-5 flex items-center justify-center mb-4">
+            <x-candidate.partials.no-data-section title="No experience yet"
+                subtitle='Add your work experience to showcase your professional journey' addTitle="Add Experience"
+                :route="route('candidate.experience.create')">
+                <x-slot name="icon">
                     <x-heroicon-o-briefcase class="size-10 text-slate-400" />
-                </div>
-                <h3 class="text-lg font-semibold text-slate-900 mb-2">No experience yet</h3>
-                <p class="text-slate-600 mb-6">Add your work experience to showcase your professional journey</p>
-                <a href="{{ route('candidate.experience.create') }}"
-                    class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 px-6 rounded-lg transition-colors">
-                    <x-heroicon-o-plus class="size-4" />
-                    Add Experience
-                </a>
-            </div>
+                </x-slot>
+            </x-candidate.partials.no-data-section>
         @endif
     </x-card-body>
 </x-card>

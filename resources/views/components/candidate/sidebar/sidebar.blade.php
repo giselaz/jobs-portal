@@ -43,19 +43,19 @@
 
             <!-- Actions -->
             <div class="space-y-2">
-                <a href="{{ route('profile.edit', $profile) }}"
-                    class="w-full block text-center bg-linear-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all text-sm">
+                <a href="{{ route('candidate.profile.edit', $profile) }}"
+                    class="w-full block text-center bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white font-semibold py-3 px-6 rounded-xl shadow-lg hover:shadow-xl transition-all text-sm">
                     <x-heroicon-o-pencil-square class="size-4 inline-block mr-2 -ml-1" />
                     Edit Profile
                 </a>
                 @if ($profile?->cv_path)
-                    <a href="{{ route('candidate.cv.download') }}"
+                    <a href="{{ route('candidate.profile.cv.download') }}"
                         class="w-full block text-center border border-slate-200 hover:border-slate-300 bg-white font-semibold py-3 px-6 rounded-xl hover:shadow-md transition-all text-sm flex items-center justify-center gap-2">
                         <x-heroicon-o-arrow-down-tray class="size-4" />
                         Download CV
                     </a>
                 @else
-                    <a href="{{ route('candidate.cv.uploadCv', $profile) }}"
+                    <a href="{{ route('candidate.profile.cv.uploadCv', $profile) }}"
                         class="w-full block text-center border border-slate-200 hover:border-slate-300 bg-white font-semibold py-3 px-6 rounded-xl hover:shadow-md transition-all text-sm flex items-center justify-center gap-2">
                         <x-heroicon-o-arrow-up-tray class="size-4" />
                         Upload CV
@@ -64,14 +64,14 @@
             </div>
 
             @if ($applicationCount > 0)
-                <div class="mt-6 p-4 bg-linear-to-r from-violet-50 to-indigo-50 border border-violet-200 rounded-xl">
+                <div class="mt-6 p-4 bg-gradient-to-r from-violet-50 to-indigo-50 border border-violet-200 rounded-xl">
                     <div class="flex items-center gap-3">
                         <div class="shrink-0 p-2 bg-violet-200 rounded-lg">
                             <x-heroicon-o-briefcase class="size-5 text-violet-700" />
                         </div>
                         <div>
                             <h4 class="font-semibold text-slate-900 text-sm">{{ $applicationCount }} Applications</h4>
-                            <a href="{{ route('my-job-application.index') }}"
+                            <a href="{{ route('candidate.my-job-application.index') }}"
                                 class="text-sm text-violet-700 hover:text-violet-800 font-medium">View all →</a>
                         </div>
                     </div>

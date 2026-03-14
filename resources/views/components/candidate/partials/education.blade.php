@@ -1,10 +1,10 @@
 @props(['profile'])
 <x-card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
-    <x-partials.user-data-header class="!p-6 border-b border-slate-200" >
+    <x-candidate.partials.user-data-header title="Education" :subtitle="$profile->educations->count() . ' Faculties'">
         <x-slot name="icon">
             <x-heroicon-o-academic-cap class="size-5 text-slate-600" />
         </x-slot>
-    </x-partials.user-data-header>
+    </x-candidate.partials.user-data-header>
     <x-card-body class="p-0">
         @if ($profile->educations->count() > 0)
             <div class="divide-y divide-slate-200">
@@ -36,18 +36,13 @@
                 @endforeach
             </div>
         @else
-            <div class="text-center py-12 px-6">
-                <div class="mx-auto size-20 bg-slate-100 rounded-2xl p-5 flex items-center justify-center mb-4">
+            <x-candidate.partials.no-data-section title="No education yet"
+                subtitle="Add your education to complete your professional profile" addTitle='Add Education'
+                :route="route('candidate.education.create')">
+                <x-slot name="icon">
                     <x-heroicon-o-academic-cap class="size-10 text-slate-400" />
-                </div>
-                <h3 class="text-lg font-semibold text-slate-900 mb-2">No education yet</h3>
-                <p class="text-slate-600 mb-6">Add your education to complete your professional profile</p>
-                <a href="{{ route('candidate.education.create') }}"
-                    class="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-medium py-2.5 px-6 rounded-lg transition-colors">
-                    <x-heroicon-o-plus class="size-4" />
-                    Add Education
-                </a>
-            </div>
+                </x-slot>
+            </x-candidate.partials.no-data-section>
         @endif
     </x-card-body>
 </x-card>

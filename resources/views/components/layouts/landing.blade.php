@@ -12,7 +12,7 @@
     @stack('styles')
     @livewireStyles
 </head>
-<body class="min-h-screen bg-white text-slate-700 antialiased">
+<body class="min-h-screen bg-white text-slate-700  antialiased">
     @if (session('success'))
         <x-toast type="success" :message="session('success')" />
     @endif

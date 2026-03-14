@@ -49,7 +49,8 @@
             <li><a href="{{ route('jobs.index') }}" class="text-slate-600 hover:text-violet-600">Jobs</a></li>
             <li><a href="{{ route('employer.index') }}" class="text-slate-600 hover:text-violet-600">Employers</a></li>
             <li><a href="#" class="text-slate-600 hover:text-violet-600">Job Seekers</a></li>
-            <li><a href="{{ route('my-jobs.create') }}" class="text-slate-600 hover:text-violet-600">Post a Job</a>
+            <li><a href="{{ route('employer.my-jobs.create') }}" class="text-slate-600 hover:text-violet-600">Post a
+                    Job</a>
             </li>
         </ul>
         @auth
@@ -61,14 +62,14 @@
                 </button>
                 <x-dropdown>
                     @if (auth()->user() && auth()->user()->employer)
-                        <li><a href="{{ route('my-jobs.index') }}"
+                        <li><a href="{{ route('employer.my-jobs.index') }}"
                                 class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-violet-50 hover:text-violet-700 transition">My
                                 Jobs</a></li>
                     @else
-                        <li><a href="{{ route('my-job-application.index') }}"
+                        <li><a href="{{ route('candidate.my-job-application.index') }}"
                                 class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-violet-50 hover:text-violet-700 transition">Check
                                 Applications</a></li>
-                        <li><a href="{{ route('profile.show', auth()->user()->candidateProfile) }}"
+                        <li><a href="{{ route('candidate.profile.show') }}"
                                 class="block px-4 py-2.5 text-sm text-slate-700 hover:bg-violet-50 hover:text-violet-700 transition">
                                 My Profile</a></li>
                     @endif

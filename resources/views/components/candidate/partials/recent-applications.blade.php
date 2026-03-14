@@ -9,7 +9,7 @@
                 <h3 class="text-xl font-bold text-slate-900">Recent Applications</h3>
                 <p class="text-sm text-slate-500">{{ $recentApplications->count() }} applications</p>
             </div>
-            <a href="{{ route('my-job-application.index') }}"
+            <a href="{{ route('candidate.my-job-application.index') }}"
                 class="text-sm font-medium text-slate-700 hover:text-slate-900">View all →</a>
         </div>
     </x-card-header>
