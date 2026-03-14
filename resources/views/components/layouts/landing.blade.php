@@ -10,6 +10,7 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     @endif
     @stack('styles')
+    @livewireStyles
 </head>
 <body class="min-h-screen bg-white text-slate-700 antialiased">
     @if (session('success'))
@@ -23,5 +24,6 @@
         {{ $slot }}
     </main>
     @stack('scripts')
+    @livewireScripts
 </body>
 </html>

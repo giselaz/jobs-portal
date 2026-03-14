@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class CandidateProfile extends Model
 {
-    use HasFactory; 
+    use HasFactory;
 
     protected $fillable = [
         'user_id',
@@ -23,6 +23,7 @@ class CandidateProfile extends Model
         'cv_path',
         'is_profile_complete',
     ];
+     static $cvStatus = ['pending', 'proccessing', 'completed','failed'];
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
