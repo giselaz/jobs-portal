@@ -7,7 +7,7 @@
                 <form x-ref="filtering-form" id="filtering-form" action="{{ route('jobs.index') }}" method="GET">
                     <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                         <div>
-                            <label class="mb-1.5 block text-sm font-semibold text-slate-700">Search</label>
+                            <x-ui.label for="keyword" :required="false" class="mb-1.5 block text-sm font-semibold text-slate-700">Search</x-ui.label>
                             <x-ui.text-input name="keyword" type="text" formRef="filtering-form"
                                 value="{{ request('keyword') }}" placeholder="Job title or keyword" />
                         </div>
@@ -16,39 +16,39 @@
                             <div class="flex gap-2">
                                 <x-ui.text-input name="min_salary" type="text" formRef="filtering-form"
                                     value="{{ request('min_salary') }}" placeholder="From" />
-                                <x-text-input name="max_salary" type="text" formRef="filtering-form"
+                                <x-ui.text-input name="max_salary" type="text" formRef="filtering-form"
                                     value="{{ request('max_salary') }}" placeholder="To" />
                             </div>
                         </div>
                         <div>
                             <label class="mb-1.5 block text-sm font-semibold text-slate-700">Experience</label>
-                            <x-radio-group name="experience" :value="request('experience')" :options="array_combine(
+                            <x-ui.radio-group name="experience" :value="request('experience')" :options="array_combine(
                                 array_map('ucfirst', App\Models\JobPortal::$experience),
                                 App\Models\JobPortal::$experience,
                             )" />
                         </div>
                         <div>
                             <label class="mb-1.5 block text-sm font-semibold text-slate-700">Category</label>
-                            <x-radio-group name="category" :value="request('category')" :options="App\Models\JobPortal::$category" />
+                            <x-ui.radio-group name="category" :value="request('category')" :options="App\Models\JobPortal::$category" />
                         </div>
                     </div>
                     <div class="mt-6 flex justify-center">
-                        <x-button type="submit" variant="primary" class="min-w-[120px]">Filter</x-button>
+                        <x-ui.button type="submit" variant="primary" class="min-w-[120px]">Filter</x-ui.button>
                     </div>
                 </form>
             </div>
             <div class="space-y-4">
                 @forelse ($jobs as $job)
-                    <x-job-card :job="$job">
+                    <x-ui.job-card :job="$job">
                         <a href="{{ route('jobs.show', $job) }}" class="shrink-0">
-                            <x-button variant="primary">Check Job</x-button>
+                            <x-ui.button variant="primary">Check Job</x-ui.button>
                         </a>
-                    </x-job-card>
+                    </x-ui.job-card>
                 @empty
                     <div class="rounded-xl border border-slate-200 bg-white p-12 text-center shadow-sm">
                         <p class="text-slate-600">No jobs match your filters.</p>
                         <a href="{{ route('jobs.index') }}" class="mt-4 inline-block">
-                            <x-button variant="outline">Clear filters</x-button>
+                            <x-ui.button variant="outline">Clear filters</x-ui.button>
                         </a>
                     </div>
                 @endforelse

@@ -10,7 +10,7 @@
                     @csrf
                     <div class="mb-6">
                         <x-ui.label for="email" :required="true">Email</x-ui.label>
-                        <x-text-input type="email" name="email" value="{{ old('email') }}"
+                        <x-ui.text-input type="email" name="email" value="{{ old('email') }}"
                             placeholder="you@example.com" class="mt-1.5" />
                     </div>
                     <div class="mb-6">

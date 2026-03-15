@@ -1,6 +1,6 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\UI;
 
 use Closure;
 use Illuminate\View\Component;
@@ -24,6 +24,6 @@ class FileInput extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.file-input');
+        return view('components.ui.file-input');
     }
 }

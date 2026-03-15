@@ -11,7 +11,7 @@
                 <div class="border-b border-slate-100 bg-white p-6 sm:p-8">
                     <div class="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
                         <div class="flex gap-4">
-                            <x-initials-avatar :name="$job->employer->company_name" size="lg" />
+                            <x-ui.initials-avatar :name="$job->employer->company_name" size="lg" />
                             <div>
                                 <h1 class="text-xl font-bold tracking-tight text-slate-900 sm:text-2xl">
                                     {{ $job->title }}</h1>
@@ -20,8 +20,8 @@
                             </div>
                         </div>
                         <div class="flex flex-wrap gap-2 sm:shrink-0">
-                            <x-tag variant="pill">{{ Str::ucfirst($job->experience) }}</x-tag>
-                            <x-tag variant="pill">{{ $job->category }}</x-tag>
+                            <x-ui.tag variant="pill">{{ Str::ucfirst($job->experience) }}</x-ui.tag>
+                            <x-ui.tag variant="pill">{{ $job->category }}</x-ui.tag>
                         </div>
                     </div>
                     <p class="mt-4 text-lg font-semibold text-violet-600">${{ number_format($job->salary) }}</p>
@@ -37,7 +37,7 @@
                         @can('apply', $job)
                             <a href="{{ route('candidate.job.application.create', ['job' => $job]) }}"
                                 class="mt-8 inline-block">
-                                <x-button variant="primary">Apply for this job</x-button>
+                                <x-ui.button variant="primary">Apply for this job</x-ui.button>
                             </a>
                         @else
                             <x-messages.warning class="mt-8" message="You have already applied to this job." />
@@ -45,7 +45,7 @@
                     @else
                         <a href="{{ route('candidate.job.application.create', ['job' => $job]) }}"
                             class="mt-8 inline-block">
-                            <x-button variant="primary">Apply for this job</x-button>
+                            <x-ui.button variant="primary">Apply for this job</x-ui.button>
                         </a>
                     @endauth
 
@@ -58,7 +58,7 @@
             @endphp
             @if ($otherJobs->isNotEmpty())
                 <div class="mt-10">
-                    <x-section-title title="More jobs at {{ $job->employer->company_name }}" class="mb-6 text-left" />
+                    <x-ui.section-title title="More jobs at {{ $job->employer->company_name }}" class="mb-6 text-left" />
                     <div class="space-y-3">
                         @foreach ($otherJobs as $otherJob)
                             <a href="{{ route('jobs.show', ['job' => $otherJob]) }}"

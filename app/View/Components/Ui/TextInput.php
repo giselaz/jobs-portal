@@ -1,31 +1,29 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\UI;
 
-use App\Models\JobPortal;
 use Closure;
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 
-class JobCard extends Component
+class TextInput extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public JobPortal $job
-    ) {
-        $this->job->loadMissing([
-            'employer',
-            'employer.jobPortals', // optional nested
-        ]);
-    }
+        public ?string $value = null,
+        public ?string $name = null,
+        public ?string $placeholder = null,
+        public ?string $formRef = null,
+        public string $type
+    ) {}
 
     /**
      * Get the view / contents that represent the component.
      */
     public function render(): View|Closure|string
     {
-        return view('components.job-card');
+        return view('components.ui.text-input');
     }
 }

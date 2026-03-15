@@ -14,12 +14,12 @@
 </head>
 <body class="min-h-screen bg-white text-slate-700  antialiased">
     @if (session('success'))
-        <x-toast type="success" :message="session('success')" />
+        <x-ui.toast type="success" :message="session('success')" />
     @endif
     @if (session('error'))
-        <x-toast type="error" :message="session('error')" />
+        <x-ui.toast type="error" :message="session('error')" />
     @endif
-    <x-navbar variant="landing" />
+    <x-ui.navbar variant="landing" />
     <main>
         {{ $slot }}
     </main>

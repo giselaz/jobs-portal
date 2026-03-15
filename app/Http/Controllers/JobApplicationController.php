@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\JobPortal;
 use Illuminate\Http\Request;
-use App\View\Components\Breadcrumbs;
+use App\View\Components\UI\Breadcrumbs;
 use Illuminate\Support\Facades\Gate;
 
 class JobApplicationController extends Controller

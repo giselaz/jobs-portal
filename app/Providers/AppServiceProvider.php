@@ -23,6 +23,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::policy(JobPortal::class, JobPolicy::class);
-        View::composer('components.navbar', NavbarComposer::class);
+        View::composer('components.ui.navbar', NavbarComposer::class);
     }
 }

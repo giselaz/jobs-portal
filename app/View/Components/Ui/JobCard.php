@@ -1,21 +1,24 @@
 <?php
 
-namespace App\View\Components;
+namespace App\View\Components\UI;
 
+use App\Models\JobPortal;
 use Closure;
 use Illuminate\View\Component;
 use Illuminate\Contracts\View\View;
 
-class label extends Component
+class JobCard extends Component
 {
     /**
      * Create a new component instance.
      */
     public function __construct(
-        public ?string $for = "",
-        public ?bool $required = false
+        public JobPortal $job
     ) {
-        //
+        $this->job->loadMissing([
+            'employer',
+            'employer.jobPortals', // optional nested
+        ]);
     }
 
     /**
@@ -23,6 +26,6 @@ class label extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.label');
+        return view('components.ui.job-card');
     }
 }

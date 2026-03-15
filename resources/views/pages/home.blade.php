@@ -39,7 +39,7 @@
                         <div class="mt-10 space-y-4">
 
                             @foreach ($popularJobs as $job)
-                                <x-job-listing-card :title="$job->title" :location="$job->location" :applyUrl="route('candidate.job.application.create', $job)">
+                                <x-ui.job-listing-card :title="$job->title" :location="$job->location" :applyUrl="route('candidate.job.application.create', $job)">
                                     <div class="flex gap-2">
                                         <x-ui.tag variant="pill">
                                             {{ Str::ucfirst($job->category) }}
@@ -49,7 +49,7 @@
                                         </x-ui.tag>
                                     </div>
 
-                                </x-job-listing-card>
+                                </x-ui.job-listing-card>
                             @endforeach
                         </div>
                     </div>
