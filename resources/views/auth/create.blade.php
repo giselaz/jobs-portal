@@ -9,12 +9,13 @@
                 <form action="{{ route('auth.store') }}" method="POST">
                     @csrf
                     <div class="mb-6">
-                        <x-label for="email" :required="true">Email</x-label>
-                        <x-text-input type="email" name="email" value="{{ old('email') }}" placeholder="you@example.com" class="mt-1.5" />
+                        <x-ui.label for="email" :required="true">Email</x-ui.label>
+                        <x-text-input type="email" name="email" value="{{ old('email') }}"
+                            placeholder="you@example.com" class="mt-1.5" />
                     </div>
                     <div class="mb-6">
-                        <x-label for="password" :required="true">Password</x-label>
-                        <x-text-input type="password" name="password" placeholder="••••••••" class="mt-1.5" />
+                        <x-ui.label for="password" :required="true">Password</x-ui.label>
+                        <x-ui.text-input type="password" name="password" placeholder="••••••••" class="mt-1.5" />
                     </div>
                     <div class="mb-6 flex flex-wrap items-center justify-between gap-3 text-sm">
                         <label class="flex cursor-pointer items-center gap-2 text-slate-700">
@@ -22,16 +23,17 @@
                                 class="h-4 w-4 rounded border-slate-300 text-violet-600 focus:ring-violet-500" />
                             <span>Remember me</span>
                         </label>
-                        <a href="#" class="font-medium text-violet-600 hover:text-violet-700 transition">Forgot password?</a>
+                        <a href="#" class="font-medium text-violet-600 hover:text-violet-700 transition">Forgot
+                            password?</a>
                     </div>
-                    <x-button type="submit" variant="primary" class="w-full py-3">Sign in</x-button>
+                    <x-ui.button type="submit" variant="primary" class="w-full py-3">Sign in</x-ui.button>
                 </form>
             </div>
             <p class="mt-6 text-center text-sm text-slate-600">
                 Don't have an account?
-                <a href="{{ route('register') }}" class="font-medium text-violet-600 hover:text-violet-700 transition">Sign up</a>
+                <a href="{{ route('register') }}"
+                    class="font-medium text-violet-600 hover:text-violet-700 transition">Sign up</a>
             </p>
         </div>
     </section>
 </x-layout>
- 

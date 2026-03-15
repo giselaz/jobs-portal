@@ -33,7 +33,7 @@
                 :isLogout="true">Logout</x-ui.button>
         </form>
     </li>
-    </x-dropdown>
+    </x-ui.dropdown>
     </li>
 @else
     <li><a href="{{ route('auth.create') }}" class="text-slate-700 hover:text-violet-600 transition">Sign In</a></li>
@@ -80,7 +80,7 @@
                             <x-ui.button type="submit" variant="outline" :isLogout="true">Logout</x-ui.button>
                         </form>
                     </li>
-                    </x-dropdown>
+                </x-ui.dropdown>
             </div>
         @else
             <div class="flex items-center gap-3">

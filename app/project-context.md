@@ -69,14 +69,3 @@ app/
 - [date] CV upload + Ollama parsing working
 ```
 
----
-
-Then at the start of each session paste both files:
-```
-Here are my two context files for this project:
-
-[AGENT_INSTRUCTIONS.md contents]
-
-[PROJECT_CONTEXT.md contents]
-
-Today I want to work on: [specific task]

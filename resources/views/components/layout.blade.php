@@ -21,14 +21,14 @@
 
 
     @if (!request()->routeIs('auth.create'))
-        <x-navbar variant="app" />
-        <x-breadcrumbs class="mb-4" />
+        <x-ui.navbar variant="app" />
+        <x-ui.breadcrumbs class="mb-4" />
     @endif
     @if (session('success'))
-        <x-toast type="success" :message="session('success')" />
+        <x-ui.toast type="success" :message="session('success')" />
     @endif
     @if (session('error'))
-        <x-toast type="error" :message="session('error')" />
+        <x-ui.toast type="error" :message="session('error')" />
     @endif
     {{ $slot }}
 </body>

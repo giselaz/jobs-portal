@@ -11,29 +11,29 @@
                 <div class="lg:col-span-3">
                     @if ($profile)
                         <!-- Profile Info Card -->
-                        <x-candidate.partials.profile :profile="$profile" x-show="activeTab === 'profile'" x-transition />
+                        <x-candidate.partials.profile :profile="$profile" t  x-show="activeTab === 'profile'" x-transition />
 
                         <!-- Experience Section -->
-                        @if ($profile->experiences->count() > 0)
-                            <x-candidate.partials.experience :profile="$profile" x-show="activeTab === 'experience'"
+                        @if ($experienceCount > 0)
+                            <x-candidate.partials.experience :profile="$profile" :$experienceCount x-show="activeTab === 'experience'"
                                 x-transition />
                         @endif
 
-                        <!-- Education Section -->
-                        @if ($profile->educations->count() > 0)
-                            <x-candidate.partials.education :profile="$profile" x-show="activeTab === 'education'"
+                        <!-- Education Section --> 
+                        @if ($educationCount > 0)
+                            <x-candidate.partials.education :profile="$profile" :$educationCount  x-show="activeTab === 'education'"
                                 x-transition />
                         @endif
 
                         <!-- Languages Section -->
-                        @if ($profile->languages->count() > 0)
-                            <x-candidate.partials.language :profile="$profile" x-show="activeTab === 'language'"
+                        @if ($languageCount > 0)
+                            <x-candidate.partials.language :profile="$profile" :$languageCount x-show="activeTab === 'language'"
                                 x-transition />
                         @endif
 
                         <!-- Skills Section -->
-                        @if ($profile->skills->count() > 0)
-                            <x-candidate.partials.skill :profile="$profile" x-show="activeTab === 'skills'"
+                        @if ($skillsCount > 0)
+                            <x-candidate.partials.skill :profile="$profile" :$skillsCount x-show="activeTab === 'skills'"
                                 x-transition />
                         @endif
 

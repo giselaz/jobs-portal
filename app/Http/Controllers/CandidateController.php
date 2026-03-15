@@ -16,15 +16,32 @@ class CandidateController extends Controller
     public function show(CandidateProfile $candidate)
     {
         $user = request()->user()->loadCount('jobApplications');
-        $profile = $user->candidateProfile;
-        $applicationCount = $user->job_applications_count;
         $recentApplications = $user->jobApplications()
             ->with('jobPortal')
             ->latest()
             ->limit(5)
             ->get();
+        $profile = CandidateProfile::with([
+            'user',
+            'skills',
+            'languages',
+            'experiences' => fn($q) => $q->orderBy('start_date', 'desc'),
+            'educations'  => fn($q) => $q->orderBy('start_date', 'desc'),
+        ])
+            ->where('user_id', $user->id)
+            ->firstOrFail();
 
-        return view("candidate.profile.show", compact('profile', 'recentApplications', 'applicationCount'));
+
+        return view('candidate.profile.show', [
+            'profile'            => $profile,
+            'experienceCount'    => $profile->experiences->count(),
+            'educationCount'     => $profile->educations->count(),
+            'languageCount'      => $profile->languages()->count(),
+            'skillsCount'         => $profile->skills->count(),
+            'applicationCount'   => $profile->job_applications_count,
+            // 'profileCompletion'  => $this->profileService->calculateCompletion($profile),
+            'recentApplications' => $recentApplications
+        ]);
     }
 
     public function edit(string $id)

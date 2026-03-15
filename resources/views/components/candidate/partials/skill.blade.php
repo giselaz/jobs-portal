@@ -1,4 +1,4 @@
-@props(['profile'])
+@props(['profile', 'skillsCount'])
 <x-card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
     <x-card-header class="!p-6 border-b border-slate-200">
         <div class="flex items-center gap-3">
@@ -7,12 +7,12 @@
             </div>
             <div>
                 <h3 class="text-xl font-bold text-slate-900">Skills</h3>
-                <p class="text-sm text-slate-500">{{ $profile->skills->count() }} skills</p>
+                <p class="text-sm text-slate-500">{{ $skillsCount }} skills</p>
             </div>
         </div>
     </x-card-header>
     <x-card-body class="p-6">
-        @if ($profile->skills->count() > 0)
+        @if ($skillsCount > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 @foreach ($profile->skills->take(12) as $skill)
                     <div
@@ -39,11 +39,11 @@
                     </div>
                 @endforeach
             </div>
-            @if ($profile->skills->count() > 12)
+            @if ($skillsCount > 12)
                 <div class="mt-6 pt-6 border-t border-slate-200 text-center">
                     <a href="{{ route('candidate.skill.index') }}"
                         class="inline-flex items-center gap-2 text-slate-600 hover:text-slate-900 font-medium text-sm">
-                        Show all {{ $profile->skills->count() }} skills
+                        Show all {{ $skillsCount }} skills
                         <x-heroicon-o-chevron-right class="size-4" />
                     </a>
                 </div>

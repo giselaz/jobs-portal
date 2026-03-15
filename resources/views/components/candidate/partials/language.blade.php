@@ -1,4 +1,4 @@
-@props(['profile'])
+@props(['profile','languageCount'])
 <x-card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
     <x-card-header class="!p-6 border-b border-slate-200">
         <div class="flex items-center gap-3">
@@ -7,12 +7,12 @@
             </div>
             <div>
                 <h3 class="text-xl font-bold text-slate-900">Languages</h3>
-                <p class="text-sm text-slate-500">{{ $profile->languages->count() }} languages</p>
+                <p class="text-sm text-slate-500">{{ $languageCount }} languages</p>
             </div>
         </div>
     </x-card-header>
     <x-card-body class="p-6">
-        @if ($profile->languages->count() > 0)
+        @if ($languageCount > 0)
             <div class="space-y-3">
                 @foreach ($profile->languages as $language)
                     <div

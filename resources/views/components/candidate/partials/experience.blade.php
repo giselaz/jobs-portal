@@ -1,4 +1,4 @@
-@props(['profile'])
+@props(['profile','experienceCount'])
 <x-card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
     <x-candidate.partials.user-data-header title="Experience" :subtitle="$profile->experiences->count() . ' Experiences'">
         <x-slot name="icon">

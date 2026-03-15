@@ -1,14 +1,14 @@
-@props(['profile'])
+@props(['profile', 'educationCount'])
 <x-card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
-    <x-candidate.partials.user-data-header title="Education" :subtitle="$profile->educations->count() . ' Faculties'">
+    <x-candidate.partials.user-data-header title="Education" :subtitle="$educationCount . ' Faculties'"> 
         <x-slot name="icon">
             <x-heroicon-o-academic-cap class="size-5 text-slate-600" />
         </x-slot>
     </x-candidate.partials.user-data-header>
     <x-card-body class="p-0">
-        @if ($profile->educations->count() > 0)
+        @if ($educationCount > 0)
             <div class="divide-y divide-slate-200">
-                @foreach ($profile->educations->sortByDesc('start_date') as $education)
+                @foreach ($profile->educations as $education)
                     <div class="p-6 hover:bg-slate-50/50 transition-colors">
                         <div class="flex items-start gap-4 pb-4">
                             <div
