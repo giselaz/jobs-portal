@@ -1,6 +1,6 @@
 @props(['profile', 'skillsCount'])
-<x-card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
-    <x-card-header class="!p-6 border-b border-slate-200">
+<x-ui.card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
+    <x-ui.card-header class="!p-6 border-b border-slate-200">
         <div class="flex items-center gap-3">
             <div class="flex-shrink-0 p-2 bg-slate-100 rounded-lg">
                 <x-heroicon-o-sparkles class="size-5 text-slate-600" />
@@ -10,8 +10,8 @@
                 <p class="text-sm text-slate-500">{{ $skillsCount }} skills</p>
             </div>
         </div>
-    </x-card-header>
-    <x-card-body class="p-6">
+    </x-ui.card-header>
+    <x-ui.card-body class="p-6">
         @if ($skillsCount > 0)
             <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 @foreach ($profile->skills->take(12) as $skill)
@@ -62,5 +62,5 @@
                 </a>
             </div>
         @endif
-    </x-card-body>
-</x-card>
+    </x-ui.card-body>
+</x-ucard>

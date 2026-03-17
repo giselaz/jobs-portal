@@ -10,6 +10,7 @@
         <p class="text-sm text-slate-500">{{ $location }}</p>
         <div class="mt-2 flex flex-wrap gap-2">{{ $slot }}</div>
     </div>
+    
     <a href="{{ $applyUrl }}" class="shrink-0">
         <x-ui.button variant="primary">Apply Now</x-ui.button>
     </a>

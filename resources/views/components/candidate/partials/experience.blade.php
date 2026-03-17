@@ -1,11 +1,11 @@
 @props(['profile','experienceCount'])
-<x-card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
+<x-ui.card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
     <x-candidate.partials.user-data-header title="Experience" :subtitle="$profile->experiences->count() . ' Experiences'">
         <x-slot name="icon">
             <x-heroicon-o-briefcase class="size-5 text-slate-600" />
         </x-slot>
     </x-candidate.partials.user-data-header>
-    <x-card-body class="p-0">
+    <x-ui.card-body class="p-0">
         @if ($profile->experiences->count() > 0)
             <div class="divide-y divide-slate-200">
                 @foreach ($profile->experiences->sortByDesc('start_date') as $experience)
@@ -53,5 +53,5 @@
                 </x-slot>
             </x-candidate.partials.no-data-section>
         @endif
-    </x-card-body>
-</x-card>
+    </x-ui.card-body>
+</x-ui.card>

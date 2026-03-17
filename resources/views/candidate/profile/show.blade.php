@@ -1,7 +1,7 @@
 <x-layouts.landing>
     <div class="min-h-[80vh] px-4 py-12">
         <div class="mx-auto max-w-6xl">
-            <x-section-title title="My Profile" subtitle="Manage your profile and view your applications"
+            <x-ui.section-title title="My Profile" subtitle="Manage your profile and view your applications"
                 class="mb-8 text-left" />
             <div class="grid gap-8 lg:grid-cols-4" x-data="{ activeTab: 'profile' }"> 
                 <!-- Sidebar -->
@@ -49,9 +49,9 @@
                             <h3 class="mt-4 text-lg font-semibold text-slate-900">No Profile Yet</h3>
                             <p class="mt-2 text-slate-600">Complete your profile to help employers find you</p>
                             <a href="{{ route('candidate.profile.edit') }}" class="mt-6 inline-block">
-                                <x-button type="button" variant="primary">
+                                <x-ui.button type="button" variant="primary">
                                     Complete Profile
-                                </x-button>
+                                </x-ui.button>
                             </a>
                         </div>
                     @endif

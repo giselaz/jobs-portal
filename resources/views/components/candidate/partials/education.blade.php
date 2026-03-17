@@ -1,11 +1,11 @@
 @props(['profile', 'educationCount'])
-<x-card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
+<x-ui.card class="mb-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
     <x-candidate.partials.user-data-header title="Education" :subtitle="$educationCount . ' Faculties'"> 
         <x-slot name="icon">
             <x-heroicon-o-academic-cap class="size-5 text-slate-600" />
         </x-slot>
     </x-candidate.partials.user-data-header>
-    <x-card-body class="p-0">
+    <x-ui.card-body class="p-0">
         @if ($educationCount > 0)
             <div class="divide-y divide-slate-200">
                 @foreach ($profile->educations as $education)
@@ -44,5 +44,5 @@
                 </x-slot>
             </x-candidate.partials.no-data-section>
         @endif
-    </x-card-body>
-</x-card>
+    </x-ui.card-body>
+</x-ui.card>

@@ -1,6 +1,6 @@
 @props(['recentApplications'])
-<x-card class="mt-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
-    <x-card-header class="!p-6 border-b border-slate-200">
+<x-ui.card class="mt-6 border border-slate-200/50 bg-white/80 backdrop-blur-sm shadow-lg">
+    <x-ui.card-header class="!p-6 border-b border-slate-200">
         <div class="flex items-center gap-3">
             <div class="flex-shrink-0 p-2 bg-slate-100 rounded-lg">
                 <x-heroicon-o-clipboard-document-list class="size-5 text-slate-600" />
@@ -12,8 +12,8 @@
             <a href="{{ route('candidate.my-job-application.index') }}"
                 class="text-sm font-medium text-slate-700 hover:text-slate-900">View all →</a>
         </div>
-    </x-card-header>
-    <x-card-body class="p-0">
+    </x-ui.card-header>
+    <x-ui.card-body class="p-0">
         @if ($recentApplications->count() > 0)
             <div class="divide-y divide-slate-200">
                 @foreach ($recentApplications as $application)
@@ -60,5 +60,5 @@
                 </a>
             </div>
         @endif
-    </x-card-body>
-</x-card>
+    </x-ui.card-body>
+</x-ui.card>

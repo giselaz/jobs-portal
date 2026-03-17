@@ -1,11 +1,11 @@
 @props(['profile', 'applicationCount'])
 <aside class="lg:col-span-1 sticky top-8 self-start space-y-6">
     <!-- Profile Card -->
-    <x-card class="border-0 shadow-lg ring-1 ring-slate-200/50">
+    <x-ui.card class="border-0 shadow-lg ring-1 ring-slate-200/50">
         <div class="p-6">
             <div class="text-center mb-6">
                 <div class="relative inline-block mb-4">
-                    <x-initials-avatar :name="Auth::user()->name" class="size-20 ring-4 ring-white shadow-2xl mx-auto" />
+                    <x-ui.initials-avatar :name="Auth::user()->name" class="size-20 ring-4 ring-white shadow-2xl mx-auto" />
                     @if ($profile->is_profile_complete)
                         <div
                             class="absolute -bottom-1 -right-1 bg-emerald-500 border-4 border-white rounded-full p-1.5 shadow-lg">
@@ -78,5 +78,5 @@
                 </div>
             @endif
         </div>
-    </x-card>
+    </x-ui.card>
 </aside>

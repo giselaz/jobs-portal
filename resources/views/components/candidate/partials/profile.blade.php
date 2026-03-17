@@ -1,11 +1,11 @@
 @props(['profile'])
-<x-card class="mb-8 border border-slate-200/50 bg-gradient-to-br from-slate-50 to-white shadow-xl">
+<x-ui.card class="mb-8 border border-slate-200/50 bg-gradient-to-br from-slate-50 to-white shadow-xl">
     <div class="p-8 sm:p-8">
         <div class="flex flex-col lg:flex-row lg:items-start lg:gap-6">
             <!-- Avatar & Headline -->
             <div class="flex-shrink-0 mb-6 lg:mb-0">
                 <div class="relative">
-                    <x-initials-avatar :name="Auth::user()->name" class="size-24 ring-4 ring-white shadow-lg" />
+                    <x-ui.initials-avatar :name="Auth::user()->name" class="size-24 ring-4 ring-white shadow-lg" />
                 </div>
                 <div class="mt-4 text-center lg:text-left">
                     <h1 class="text-2xl font-bold text-slate-900 mb-1">{{ Auth::user()->name }}</h1>
@@ -73,4 +73,4 @@
             </div>
         @endif
     </div>
-</x-card>
+</x-ui.card>
