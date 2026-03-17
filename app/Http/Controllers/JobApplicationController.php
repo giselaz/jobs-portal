@@ -13,10 +13,6 @@ class JobApplicationController extends Controller
     public function create(JobPortal $job)
     {
         Gate::authorize('apply', $job);
-        Breadcrumbs::add('Home', '/');
-        Breadcrumbs::add('Jobs', route('jobs.index'));
-        Breadcrumbs::add($job->title, route('jobs.show', ['job' =>  $job]));
-        Breadcrumbs::add('Apply', route('job.application.create', ['job' => $job]));
         return view('job_application.create', ['job' => $job]);
     }
 

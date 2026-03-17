@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\JobPortal;
 use App\Policies\JobPolicy;
+use App\View\Composers\GlobalComposer;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use App\View\Composers\NavbarComposer;
@@ -24,5 +25,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Gate::policy(JobPortal::class, JobPolicy::class);
         View::composer('components.ui.navbar', NavbarComposer::class);
+        View::composer('*', GlobalComposer::class);
     }
 }

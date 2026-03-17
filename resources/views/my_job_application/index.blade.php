@@ -1,7 +1,7 @@
 <x-layouts.landing>
     <section class="border-t border-slate-100 bg-slate-50/30 py-10">
         <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-            <x-section-title title="My applications" subtitle="Track your job applications and their status"
+            <x-ui.section-title title="My applications" subtitle="Track your job applications and their status"
                 class="mb-8" />
 
             @forelse ($applications as $jobApplication)
@@ -27,23 +27,23 @@
                                     <p class="mt-1 text-sm font-medium text-violet-600">
                                         ${{ number_format($job->salary) }}</p>
                                     <div class="mt-2 flex flex-wrap gap-2">
-                                        <x-tag variant="pill">{{ Str::ucfirst($job->experience) }}</x-tag>
-                                        <x-tag variant="pill">{{ $job->category }}</x-tag>
+                                        <x-ui.tag variant="pill">{{ Str::ucfirst($job->experience) }}</x-ui.tag>
+                                        <x-ui.tag variant="pill">{{ $job->category }}</x-ui.tag>
                                     </div>
                                 </div>
                             </div>
                             <div class="flex shrink-0 flex-wrap items-center gap-3 sm:flex-nowrap">
                                 <a href="{{ route('jobs.show', $job) }}" class="inline-block">
-                                    <x-button variant="outline">View job</x-button>
+                                    <x-ui.button variant="outline">View job</x-ui.button>
                                 </a>
                                 <form
-                                    action="{{ route('my-job-application.destroy', ['my_job_application' => $jobApplication]) }}"
+                                    action="{{ route('candidate.my-job-application.destroy', ['my_job_application' => $jobApplication]) }}"
                                     method="POST" onsubmit="return confirm('Cancel this application?');">
                                     @csrf
                                     @method('DELETE')
-                                    <x-button type="submit"
+                                    <x-ui.button type="submit"
                                         class="border-red-200! text-red-600! hover:bg-red-50! hover:border-red-300!">Cancel
-                                        application</x-button>
+                                        application</x-ui.button>
                                 </form>
                             </div>
                         </div>
@@ -78,20 +78,20 @@
                     @if ($jobApplication->cv_path !== null)
                         <div class="p-4 sm:p-6">
                             <p class="mb-2 text-xs font-medium uppercase tracking-wide text-slate-500">Your CV</p>
-                            <a href="{{ route('cv.view', $jobApplication) }}" target="_blank" rel="noopener noreferrer"
+                            {{-- <a href="{{ route('candidate.profile.cv.download ', $jobApplication) }}" target="_blank" rel="noopener noreferrer"
                                 class="inline-flex items-center gap-1.5 text-sm font-medium text-violet-600 hover:text-violet-700 transition">
                                 <x-heroicon-o-arrow-top-right-on-square class="h-4 w-4" />
                                 View CV in new tab
-                            </a>
-                            <div class="mt-3 h-64 overflow-hidden rounded-lg border border-slate-200 bg-white">
-                                <iframe src="{{ route('cv.view', $jobApplication) }}" title="Your CV"
+                            </a> --}}
+                            {{-- <div class="mt-3 h-64 overflow-hidden rounded-lg border border-slate-200 bg-white">
+                                <iframe src="{{ route('candidate.profile.cv.download', $jobApplication) }}" title="Your CV"
                                     class="h-full w-full"></iframe>
-                            </div>
+                            </div> --}}
                         </div>
                     @endif
                 </article>
             @empty
-                <x-empty-collection title="No job applications yet" subtitle="Browse jobs and apply"
+                <x-ui.empty-collection title="No job applications yet" subtitle="Browse jobs and apply"
                     :url="route('jobs.index')" />
             @endforelse
         </div>

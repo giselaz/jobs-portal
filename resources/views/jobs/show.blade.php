@@ -42,7 +42,7 @@
                         @else
                             <x-messages.warning class="mt-8" message="You have already applied to this job." />
                         @endcan
-                    @else
+                    @elseif ($isCandidate)
                         <a href="{{ route('candidate.job.application.create', ['job' => $job]) }}"
                             class="mt-8 inline-block">
                             <x-ui.button variant="primary">Apply for this job</x-ui.button>
@@ -58,7 +58,8 @@
             @endphp
             @if ($otherJobs->isNotEmpty())
                 <div class="mt-10">
-                    <x-ui.section-title title="More jobs at {{ $job->employer->company_name }}" class="mb-6 text-left" />
+                    <x-ui.section-title title="More jobs at {{ $job->employer->company_name }}"
+                        class="mb-6 text-left" />
                     <div class="space-y-3">
                         @foreach ($otherJobs as $otherJob)
                             <a href="{{ route('jobs.show', ['job' => $otherJob]) }}"

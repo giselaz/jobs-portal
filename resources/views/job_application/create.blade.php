@@ -22,22 +22,21 @@
 
             <div class="rounded-2xl border border-slate-200 bg-white p-6 shadow-sm sm:p-8">
                 <h2 class="mb-6 text-xl font-bold tracking-tight text-slate-900">Your application</h2>
-                route('candidate.job.application.store', $job)
-                @csrf
+                <form method="POST" action="{{ route('candidate.job.application.store', $job) }}"></form>
+                    @csrf
                 <div class="mb-6">
-                    <x-label for="expected_salary" :required="true">Expected salary</x-label>
-                    <x-text-input name="expected_salary" type="number" value="{{ old('expected_salary') }}"
+                    <x-ui.label for="expected_salary" :required="true">Expected salary</x-ui.label>
+                    <x-ui.text-input name="expected_salary" type="number" value="{{ old('expected_salary') }}"
                         placeholder="e.g. 50000" min="0" class="mt-1.5 w-full" />
                 </div>
                 <div class="mb-6">
-                    <x-label for="cv" :required="true">CV (PDF or document)</x-label>
-                    <input type="file" name="cv" id="cv" required accept=".pdf,.doc,.docx"
-                        class="mt-1.5 block w-full text-sm text-slate-600 file:mr-4 file:rounded-lg file:border-0 file:bg-violet-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-violet-700 hover:file:bg-violet-100" />
+                    <x-ui.label for="cv" :required="true">CV (PDF or document)</x-ui.label>
+                    <x-ui.file-input type="file" name="cv" id="cv" required accept=".pdf,.doc,.docx" />
                     @error('cv')
                         <p class="mt-1 text-xs text-red-500">{{ $message }}</p>
                     @enderror
                 </div>
-                <x-button type="submit" variant="primary" class="w-full py-3">Submit application</x-button>
+                <x-ui.button type="submit" variant="primary" class="w-full py-3">Submit application</x-ui.button>
                 </form>
             </div>
         </div>

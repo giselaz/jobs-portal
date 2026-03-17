@@ -1,4 +1,4 @@
-@props(['job'])
+@props(['job']) 
 <article
     {{ $attributes->merge(['class' => 'flex flex-wrap items-center gap-4 rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow md:flex-nowrap']) }}>
     <x-ui.initials-avatar :name="$job->employer->company_name" size="md" />
